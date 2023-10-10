@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tienda</title>
+        <link rel="stylesheet" href="../style/style.css">
+        <script>
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                const hr = document.querySelector('.hr-header');
+
+                if (window.scrollY > 55) {  // puedes ajustar el "10" según el punto de inicio del efecto que prefieras.
+                    // header.style.marginBottom = '10px'; // el espacio que deseas cuando hay scroll.
+                    hr.style.marginTop = '0'; // si también deseas reducir el margen superior del hr.
+                } else {
+                    header.style.marginBottom = ''; // resetea al estilo original.
+                    hr.style.marginTop = ''; // resetea al estilo original.
+                }
+            });
+        </script>
+    </head>
+
+    <body>
+        <div class="h1">
+            <h1>TIENDA ONLINE</h1>
+        </div class="h1">
+        <header>
+            <div class="div_header">
+                <div>
+                    <img src="https://static.thenounproject.com/png/127211-200.png" alt="logo_tienda" id="logo_tienda">
+                </div>
+                <div class="input-container">
+                    <input type="search" name="text" class="input" placeholder="buscar...">
+                    <span class="icon">
+                        <svg width="19px" height="19px" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path opacity="1" d="M14 5H20" stroke="#000" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round"></path>
+                                <path opacity="1" d="M14 8H17" stroke="#000" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round"></path>
+                                <path d="M21 11.5C21 16.75 16.75 21 11.5 21C6.25 21 2 16.75 2 11.5C2 6.25 6.25 2 11.5 2"
+                                    stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                </path>
+                                <path opacity="1" d="M22 22L20 20" stroke="#000" stroke-width="3.5"
+                                    stroke-linecap="round" stroke-linejoin="round"></path>
+                            </g>
+                        </svg>
+                    </span>
+                </div>
+                <div class="botones_header">
+                    <button type="button"><span>Login</span></button>
+                    <button type="button"><span>Register</span></button>
+                </div>
+            </div>
+            <hr class="hr-header">
+        </header>
+        <main>
+            <h2>Novedades</h2>
+            <div class="galeria_novedades">
+                <section>
+                    <img src="https://static.zara.net/photos///2023/I/0/2/p/0761/350/807/2/w/316/0761350807_6_1_1.jpg?ts=1688039025314"
+                        alt="">
+                    <img src="https://static.zara.net/photos///2023/I/0/2/p/0761/350/800/2/w/316/0761350800_6_1_1.jpg?ts=1688110917303"
+                        alt="">
+                    <img src="https://static.zara.net/photos///2023/I/0/2/p/0039/310/803/2/w/316/0039310803_6_1_1.jpg?ts=1693470622320"
+                        alt="">
+                    <img src="https://static.zara.net/photos///2023/I/0/2/p/0761/343/401/2/w/316/0761343401_6_1_1.jpg?ts=1694678808791"
+                        alt="">
+                </section>
+            </div>
+            <h2>Destacados</h2>
+            <div class="galeria_novedades">
+                <section>
+                    <img src="https://static.zara.net/photos///2023/I/0/2/p/0761/331/681/2/w/316/0761331681_6_1_1.jpg?ts=1692025950069"
+                        alt="https://static.zara.net/photos///2023/I/0/2/p/0039/310/251/2/w/316/0039310251_6_1_1.jpg?ts=1695130875215">
+                    <img src="https://static.zara.net/photos///2023/I/0/2/p/5536/320/800/2/w/316/5536320800_6_1_1.jpg?ts=1695046064254"
+                        alt="">
+                    <img src="https://static.zara.net/photos///2023/I/0/2/p/4729/306/922/2/w/316/4729306922_6_1_1.jpg?ts=1693380537042"
+                        alt="">
+                    <img src="https://static.zara.net/photos///2023/I/0/2/p/0761/324/712/2/w/316/0761324712_6_1_1.jpg?ts=1690904700098"
+                        alt="">
+                </section>
+            </div>
+            <h2>Ofertas</h2>
+            <div class="galeria_novedades">
+                <section>
+                    <img src="https://static.zara.net/photos///2023/I/0/2/p/4729/300/802/2/w/316/4729300802_6_1_1.jpg?ts=1687427537339"
+                        alt="">
+                    <img src="https://static.zara.net/photos///2023/I/0/2/p/4729/302/707/2/w/316/4729302707_6_1_1.jpg?ts=1686564628430"
+                        alt="">
+                    <img src="https://static.zara.net/photos///2023/I/0/2/p/0039/310/803/2/w/316/0039310803_6_1_1.jpg?ts=1693470622320"
+                        alt="">
+                    <img src="https://static.zara.net/photos///2023/I/0/2/p/4729/390/505/2/w/316/4729390505_6_1_1.jpg?ts=1693842667906"
+                        alt="">
+                </section>
+            </div>
+        </main>
+        <footer>
+            <hr class="hr-footer">
+            <nav>
+                <div class="div_footer">
+                    <div class="div_enlaces_footer">
+                        <a href="">enlace 1</a><br>
+                        <a href="">enlace 2</a><br>
+                        <a href="">enlace 3</a><br>
+                        <a href="">enlace 4</a><br>
+                        <a href="">enlace 5</a><br>
+                    </div>
+                    <div class="div_enlaces_footer">
+                        <a href="">enlace 1</a><br>
+                        <a href="">enlace 2</a><br>
+                        <a href="">enlace 3</a><br>
+                        <a href="">enlace 4</a><br>
+                        <a href="">enlace 5</a><br>
+                    </div>
+                    <div class="div_enlaces_footer">
+                        <a href=""><img src="https://cdn-icons-png.flaticon.com/512/1384/1384031.png" alt=""
+                                class="icons_social_media"></a><br>
+                        <a href=""><img src="https://cdn-icons-png.flaticon.com/512/1419/1419524.png" alt=""
+                                class="icons_social_media"></a><br>
+                        <a href=""><img src="https://cdn-icons-png.flaticon.com/512/1384/1384023.png" alt=""
+                                class="icons_social_media"></a><br>
+                        <a href=""><img src="https://www.svgrepo.com/show/346839/facebook-circle.svg" alt=""
+                                class="icons_social_media"></a><br>
+                    </div>
+                </div class="div_footer">
+            </nav>
+        </footer>
+    </body>
+
+</html>
