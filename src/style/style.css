@@ -29,7 +29,6 @@ header {
     top: 0;
     z-index: 1;
     background-color: antiquewhite;
-    transition: margin-bottom 0.3s ease;
 }
 
 .div_header {
@@ -180,4 +179,48 @@ a {
 
 .icons_social_media {
     width: 4%;
+}
+
+#login, #registro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.fondo {
+    background-color: rgba(0, 0, 0, 0.381);
+    width: 100%;
+    height: 100%;
+}
+
+.modal {
+    animation: modal 1s;
+    width: 70%;
+    max-width: 300px;
+    padding: 20px;
+    background-color: azure;
+    border: 1px solid blue;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.oculto {
+    display: none;
+}
+
+@keyframes modal {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -200px) rotate(180deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
 }
