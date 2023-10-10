@@ -17,6 +17,7 @@ body {
     border: none;
     height: 2px;
     background-color: black;
+    transition: margin-top 0.3s ease;
 }
 
 h1 {
@@ -28,6 +29,7 @@ header {
     top: 0;
     z-index: 1;
     background-color: antiquewhite;
+    transition: margin-bottom 0.3s ease;
 }
 
 .div_header {
