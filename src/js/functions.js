@@ -35,4 +35,26 @@ window.onload = () => {
             hr.style.marginTop = ''; // resetea al estilo original.
         }
     });
+    window.addEventListener('mouseover', function() {
+        // Selecciona todas las imágenes y párrafos
+        const imagenes = document.querySelectorAll('.imagenes img');
+        const parrafos = document.querySelectorAll('.div-detalles');
+        // Función que cambia el ancho del párrafo correspondiente
+        function aumentarAnchoParrafo() {
+            // Obtiene el índice de la imagen sobre la que se pasa el cursor
+            let index = Array.from(imagenes).indexOf(this);
+            parrafos[index].style.width = "150px"; // Cambia el ancho a 150px
+        }
+        // Función que revierte el ancho del párrafo a su estado original
+        function reducirAnchoParrafo() {
+            // Obtiene el índice de la imagen sobre la que se pasa el cursor
+            let index = Array.from(imagenes).indexOf(this);
+            parrafos[index].style.width = ""; // Revierte el ancho
+        }
+        // Añade los oyentes de eventos a las imágenes
+        imagenes.forEach(img => {
+            img.addEventListener('mouseover', aumentarAnchoParrafo);
+            img.addEventListener('mouseout', reducirAnchoParrafo);
+        });
+    });
 };

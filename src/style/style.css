@@ -151,25 +151,37 @@ h2 {
     place-content: center;
 }
 
-section {
+.imagenes {
     display: flex;
     width: 1500px;
     height: 450px;
 }
 
-section img {
+section img, .div-detalles {
     width: 0px;
     flex-grow: 1;
     object-fit: cover;
-    opacity: .8;
+    opacity: .9;
     transition: .5s ease;
 }
 
 section img:hover {
     cursor: crosshair;
-    width: 150px;
+    width: 130px;
     opacity: 1;
     filter: contrast(120%);
+}
+
+.detalles {
+    display: flex;
+}
+
+.div-detalles {
+    text-align: center;
+}
+
+h2 {
+    font-weight: bold;
 }
 
 .div_footer {
