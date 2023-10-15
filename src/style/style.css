@@ -98,7 +98,7 @@ header {
 button {
     display: inline-block;
     border-radius: 4px;
-    background-color: brown;
+    background-color: rgb(80, 22, 22);
     border: none;
     color: #FFFFFF;
     text-align: center;
@@ -146,15 +146,23 @@ h2 {
     background-color: black;
 }
 
+.carrusel {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+}
+
 .galeria {
     display: grid;
     place-content: center;
+    flex: 0 0 100%;
+    transition: .6s ease;
 }
 
 .imagenes {
     display: flex;
     width: 1500px;
-    height: 450px;
+    height: 430px;
 }
 
 section img, .div-detalles {
@@ -165,11 +173,10 @@ section img, .div-detalles {
     transition: .5s ease;
 }
 
-section img:hover {
+.imagenes img:hover {
     cursor: crosshair;
     width: 130px;
     opacity: 1;
-    filter: contrast(120%);
 }
 
 .detalles {
@@ -181,7 +188,17 @@ section img:hover {
 }
 
 h2 {
-    font-weight: bold;
+    font-weight: normal;
+}
+
+.tallas {
+    width: 50%;
+    /* margin: 0;
+    padding: 0; */
+}
+
+.div-botones-galeria {
+    text-align: center;
 }
 
 .div_footer {
@@ -293,7 +310,7 @@ a {
     padding-bottom: 0.75rem;
     padding-left: 1.25rem;
     padding-right: 1.25rem;
-    background-color: brown;
+    background-color: rgb(80, 22, 22);
     color: #ffffff;
     font-size: 0.875rem;
     line-height: 1.25rem;
