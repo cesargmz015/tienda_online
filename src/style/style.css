@@ -372,17 +372,15 @@ a {
     text-transform: uppercase;
 }
 
-.signup-link {
-    color: #6B7280;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
+.terminos {
     text-align: center;
 }
 
-.signup-link a {
-    text-decoration: underline;
+.terminos label {
+    padding-left: 10px;
 }
 
 .copy {
-    text-align: center;
+    display: grid;
+    place-content: center;
 }

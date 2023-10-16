@@ -1,5 +1,5 @@
 <?php
-require("./conexionBBDD.php");
+// require("./conexionBBDD.php");
 
 $email = $_GET["email"];
 $password = $_GET["password"];
