@@ -152,11 +152,13 @@ h2 {
     width: 100%;
 }
 
-.galeria {
+.galeria-carrusel1,
+.galeria-carrusel2,
+.galeria-carrusel3 {
     display: grid;
     place-content: center;
     flex: 0 0 100%;
-    transition: .6s ease;
+    transition: .5s ease;
 }
 
 .imagenes {
@@ -165,7 +167,8 @@ h2 {
     height: 430px;
 }
 
-section img, .div-detalles {
+section img,
+.div-detalles {
     width: 0px;
     flex-grow: 1;
     object-fit: cover;
@@ -193,12 +196,61 @@ h2 {
 
 .tallas {
     width: 50%;
-    /* margin: 0;
-    padding: 0; */
+}
+
+h4 {
+    text-align: center;
+    font-size: large;
 }
 
 .div-botones-galeria {
     text-align: center;
+}
+
+.div-botones-galeria > :first-child {
+    margin-right: 10px;
+}
+
+.btn-prev-carrusel1,
+.btn-next-carrusel1,
+.btn-prev-carrusel2,
+.btn-next-carrusel2,
+.btn-prev-carrusel3,
+.btn-next-carrusel3 {
+    width: 70px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: xx-small;
+}
+
+.btn-prev-carrusel1 span::before,
+.btn-prev-carrusel2 span::before,
+.btn-prev-carrusel3 span::before {
+    content: '«';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: -9px;
+    transition: 0.5s;
+}
+
+.btn-prev-carrusel1 span::after,
+.btn-prev-carrusel2 span::after,
+.btn-prev-carrusel3 span::after {
+    content: '';
+}
+
+.btn-prev-carrusel1:hover span,
+.btn-prev-carrusel2:hover span,
+.btn-prev-carrusel3:hover span {
+    padding-left: 9px;
+}
+
+.btn-prev-carrusel1:hover span::before,
+.btn-prev-carrusel2:hover span::before,
+.btn-prev-carrusel3:hover span::before {
+    opacity: 1;
+    left: 0;
 }
 
 .div_footer {

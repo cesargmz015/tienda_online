@@ -47,7 +47,7 @@ window.onload = () => {
         function funcion1() {
             // Obtiene el índice de la imagen sobre la que se pasa el cursor
             let index = Array.from(imagenes).indexOf(this);
-            parrafos[index].style.width = "150px"; // Cambia el ancho a 150px
+            parrafos[index].style.width = "120px"; // Cambia el ancho a 150px
             /* esta parte sirve para hacer que los h2 y h3 de .div-detalles se pongan en negrita al pasar el cursor por su imagen del articulo correspondiente */
             let h2 = parrafos[index].querySelector('h2');
             let h3 = parrafos[index].querySelectorAll('h3');
@@ -79,16 +79,153 @@ window.onload = () => {
     });
 
     // Funcion para desplazar las galerias con los botones
-    const galerias = document.querySelectorAll('.galeria');
-    const btnPrev = document.querySelectorAll('.btn-prev');
-    const btnNext = document.querySelectorAll('.btn-next');
+    const galeria_carrusel1 = document.querySelectorAll('.galeria-carrusel1');
+    const galeria_carrusel2 = document.querySelectorAll('.galeria-carrusel2');
+    const galeria_carrusel3 = document.querySelectorAll('.galeria-carrusel3');
+    const btn_prev_carrusel1 = document.querySelector('.btn-prev-carrusel1');
+    const btn_next_carrusel1 = document.querySelector('.btn-next-carrusel1');
+    const btn_prev_carrusel2 = document.querySelector('.btn-prev-carrusel2');
+    const btn_next_carrusel2 = document.querySelector('.btn-next-carrusel2');
+    const btn_prev_carrusel3 = document.querySelector('.btn-prev-carrusel3');
+    const btn_next_carrusel3 = document.querySelector('.btn-next-carrusel3');
 
-    let indiceActual = 0; // Para rastrear la galería actual
+    //*funcion anterior
+    // btn_prev_carrusel1.style.display = 'none';
+    // btn_prev_carrusel2.style.display = 'none';
+    // btn_prev_carrusel3.style.display = 'none';
 
-    btnPrev.forEach(btn => btn.style.display = 'none');
+    btn_prev_carrusel1.style.opacity = '.7';
+    btn_prev_carrusel1.style.pointerEvents = 'none';
+    btn_prev_carrusel2.style.opacity = '.7';
+    btn_prev_carrusel2.style.pointerEvents = 'none';
+    btn_prev_carrusel3.style.opacity = '.7';
+    btn_prev_carrusel3.style.pointerEvents = 'none';
 
-    btnPrev.forEach(btn => {
-        btn.addEventListener('click', function() {
+    // Para rastrear la galería actual
+    let indiceActualCarrusel1 = 0;
+    let indiceActualCarrusel2 = 0;
+    let indiceActualCarrusel3 = 0;
+
+    btn_prev_carrusel1.addEventListener('click', function() {
+        if (indiceActualCarrusel1 > 0) {
+            indiceActualCarrusel1--;
+            actualizarCarrusel1();
+        }
+    });
+
+    btn_next_carrusel1.addEventListener('click', function() {
+        if (indiceActualCarrusel1 < 2) {
+            indiceActualCarrusel1++;
+            actualizarCarrusel1();
+        }
+    });
+
+    btn_prev_carrusel2.addEventListener('click', function() {
+        if (indiceActualCarrusel2 > 0) {
+            indiceActualCarrusel2--;
+            actualizarCarrusel2();
+        }
+    });
+
+    btn_next_carrusel2.addEventListener('click', function() {
+        if (indiceActualCarrusel2 < 2) {
+            indiceActualCarrusel2++;
+            actualizarCarrusel2();
+        }
+    });
+
+    btn_prev_carrusel3.addEventListener('click', function() {
+        if (indiceActualCarrusel3 > 0) {
+            indiceActualCarrusel3--;
+            actualizarCarrusel3();
+        }
+    });
+
+    btn_next_carrusel3.addEventListener('click', function() {
+        if (indiceActualCarrusel3 < 2) {
+            indiceActualCarrusel3++;
+            actualizarCarrusel3();
+        }
+    });
+
+    function actualizarCarrusel1() {
+        const desplazamiento = indiceActualCarrusel1 * 100;
+        galeria_carrusel1.forEach(galeria => {
+            galeria.style.transform = `translateX(-${desplazamiento}%)`;
+        });
+
+        // Verificar si estamos en la primera galería
+        if (indiceActualCarrusel1 === 0) {
+            btn_prev_carrusel1.style.opacity = '.7'; // Ocultar el botón Prev
+            btn_prev_carrusel1.style.pointerEvents = 'none';
+        } else {
+            btn_prev_carrusel1.style.opacity = '1'; // Ocultar el botón Prev
+            btn_prev_carrusel1.style.pointerEvents = '';
+        }
+
+        // Verificar si estamos en la última galería
+        if (indiceActualCarrusel1 === 2) {
+            btn_next_carrusel1.style.opacity = '.7'; // Ocultar el botón Prev
+            btn_next_carrusel1.style.pointerEvents = 'none';
+        } else {
+            btn_next_carrusel1.style.opacity = '1'; // Ocultar el botón Prev
+            btn_next_carrusel1.style.pointerEvents = '';
+        }
+    }
+
+    function actualizarCarrusel2() {
+        const desplazamiento = indiceActualCarrusel2 * 100;
+        galeria_carrusel2.forEach(galeria => {
+            galeria.style.transform = `translateX(-${desplazamiento}%)`;
+        });
+
+        // Verificar si estamos en la primera galería
+        if (indiceActualCarrusel2 === 0) {
+            btn_prev_carrusel2.style.opacity = '.7'; // Ocultar el botón Prev
+            btn_prev_carrusel2.style.pointerEvents = 'none';
+        } else {
+            btn_prev_carrusel2.style.opacity = '1'; // Ocultar el botón Prev
+            btn_prev_carrusel2.style.pointerEvents = '';
+        }
+
+        // Verificar si estamos en la última galería
+        if (indiceActualCarrusel2 === 2) {
+            btn_next_carrusel2.style.opacity = '.7'; // Ocultar el botón Prev
+            btn_next_carrusel2.style.pointerEvents = 'none';
+        } else {
+            btn_next_carrusel2.style.opacity = '1'; // Ocultar el botón Prev
+            btn_next_carrusel2.style.pointerEvents = '';
+        }
+    }
+    function actualizarCarrusel3() {
+        const desplazamiento = indiceActualCarrusel3 * 100;
+        galeria_carrusel3.forEach(galeria => {
+            galeria.style.transform = `translateX(-${desplazamiento}%)`;
+        });
+
+        // Verificar si estamos en la primera galería
+        if (indiceActualCarrusel3 === 0) {
+            btn_prev_carrusel3.style.opacity = '.7'; // Ocultar el botón Prev
+            btn_prev_carrusel3.style.pointerEvents = 'none';
+        } else {
+            btn_prev_carrusel3.style.opacity = '1'; // Ocultar el botón Prev
+            btn_prev_carrusel3.style.pointerEvents = '';
+        }
+
+        // Verificar si estamos en la última galería
+        if (indiceActualCarrusel3 === 2) {
+            btn_next_carrusel3.style.opacity = '.7'; // Ocultar el botón Prev
+            btn_next_carrusel3.style.pointerEvents = 'none';
+        } else {
+            btn_next_carrusel3.style.opacity = '1'; // Ocultar el botón Prev
+            btn_next_carrusel3.style.pointerEvents = '';
+        }
+    }
+
+    //* codigo antiguo
+
+    /* btnPrev.forEach(btn => {
+        btn.addEventListener('click', function () {
             if (indiceActual > 0) {
                 indiceActual--;
                 actualizarCarrusel();
@@ -97,15 +234,17 @@ window.onload = () => {
     });
 
     btnNext.forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
             if (indiceActual < 2) {
                 indiceActual++;
                 actualizarCarrusel();
             }
         });
-    });
+    }); */
 
-    function actualizarCarrusel() {
+
+
+    /* function actualizarCarrusel() {
         const desplazamiento = indiceActual * 100;
         galerias.forEach(galeria => {
             galeria.style.transform = `translateX(-${desplazamiento}%)`;
@@ -124,5 +263,5 @@ window.onload = () => {
         } else {
             btnNext.forEach(btn => btn.style.display = ''); // Mostrar el botón Next
         }
-    }
+    } */
 };
