@@ -184,19 +184,35 @@ section img,
 }
 
 .detalles {
+    height: 0;
     display: flex;
+    transition: height .3s ease;
+    /* Transición suave para la altura */
+    overflow: hidden;
+    /* Asegurarse de que el contenido no se muestre cuando height sea 0 */
 }
 
 .div-detalles {
+    opacity: 0;
+    /* opacity en lugar de visibility */
+    width: 0;
     text-align: center;
+    /* transition: opacity .3s ease; */
+    /* transition: width .3s ease; */
+    /* Transición suave para la opacidad */
+    pointer-events: none;
+    /* Asegurarse de que los elementos con opacidad 0 no puedan recibir eventos de clic */
 }
 
-h2 {
-    font-weight: normal;
+.div-detalles.visible {
+    opacity: 1;
+    pointer-events: auto;
+    /* Restaurar la capacidad de recibir eventos de clic cuando esté visible */
 }
 
-.tallas {
-    width: 50%;
+h2,
+h3 {
+    font-weight: bold;
 }
 
 h4 {

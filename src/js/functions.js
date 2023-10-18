@@ -42,34 +42,43 @@ window.onload = () => {
         // Selecciona todas las imágenes y párrafos
         const imagenes = document.querySelectorAll('.imagenes img');
         const parrafos = document.querySelectorAll('.div-detalles');
+        const section = document.querySelectorAll('.detalles');
 
-        // Función que cambia el ancho del párrafo correspondiente
+        // Funciones mouseover
         function funcion1() {
             // Obtiene el índice de la imagen sobre la que se pasa el cursor
             let index = Array.from(imagenes).indexOf(this);
-            parrafos[index].style.width = "120px"; // Cambia el ancho a 150px
+            section.forEach(section => {
+                section.style.height = "175px";
+            });
+            parrafos[index].classList.add("visible");
+            parrafos[index].style.width = "120px"; // Cambia el ancho
             /* esta parte sirve para hacer que los h2 y h3 de .div-detalles se pongan en negrita al pasar el cursor por su imagen del articulo correspondiente */
-            let h2 = parrafos[index].querySelector('h2');
-            let h3 = parrafos[index].querySelectorAll('h3');
+            /* let h2 = parrafos[index].querySelector('h2');
+            let h3 = parrafos[index].querySelector('h3');
+            let h4 = parrafos[index].querySelector('h4');
 
             if (h2) h2.style.fontWeight = "bold";
-            h3.forEach(h3 => {
-                h3.style.fontWeight = "bold";
-            });
+            if (h3) h3.style.fontWeight = "bold";
+            if (h4) h4.style.fontWeight = "bold"; */
         }
-        // Función que revierte el ancho del párrafo a su estado original
+        // Funciones mouseout
         function funcion2() {
             // Obtiene el índice de la imagen sobre la que se pasa el cursor
             let index = Array.from(imagenes).indexOf(this);
-            parrafos[index].style.width = ""; // Revierte el ancho
+            section.forEach(section => {
+                section.style.height = "0";
+            });
+            parrafos[index].classList.remove("visible");
+            parrafos[index].style.width = "0"; // Revierte el ancho
             // Revierte los cambios de la negrita
-            let h2 = parrafos[index].querySelector('h2');
-            let h3 = parrafos[index].querySelectorAll('h3');
+            /* let h2 = parrafos[index].querySelector('h2');
+            let h3 = parrafos[index].querySelector('h3');
+            let h4 = parrafos[index].querySelector('h4');
 
             if (h2) h2.style.fontWeight = "normal";
-            h3.forEach(h3 => {
-                h3.style.fontWeight = "normal";
-            });
+            if (h3) h3.style.fontWeight = "normal";
+            if (h4) h4.style.fontWeight = "normal"; */
         }
         // Añade los oyentes de eventos a las imágenes
         imagenes.forEach(img => {

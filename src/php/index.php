@@ -1,16 +1,11 @@
 <?php
 require_once("./modelo.php");
-$camiseta = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
-//$datos = $camiseta->obtenerDatos("SELECT * FROM camiseta ORDER BY fecha LIMIT 4");
-$datos = $camiseta->obtenerDatos("SELECT * FROM camiseta WHERE oferta = 1 LIMIT 4");
-$camisetas = $camiseta->convertirDatos($datos);
-
-//localhost/camiseta.php?id=1
-
-/*$camiseta = new conexionBBDD();
-    $camiseta->consulta("SELECT * FROM camiseta WHERE id=$_GET['id']");
-    $camiseta->tranformarDatos();*/
+$sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
+//$datos = $sudadera->obtenerDatos("SELECT * FROM sudadera ORDER BY fecha LIMIT 4");
+// $datos = $sudadera->obtenerDatos("SELECT * FROM producto WHERE oferta = 1 LIMIT 4");
+// $sudaderas = $sudadera->convertirDatos($datos);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,120 +55,111 @@ $camisetas = $camiseta->convertirDatos($datos);
         <h1>Novedades</h1>
         <!-- carrusel1 -->
         <div class="carrusel">
+            <!-- galeria1 -->
             <div class="galeria-carrusel1">
                 <section class="imagenes">
                     <?php
-                    for ($i = 0; $i < count($camisetas); $i++) {
-                        $id = $camisetas[$i]->id;
+                    $datos = $sudadera->obtenerDatos("SELECT * FROM novedades WHERE activa = 1 LIMIT 4");
+                    $sudaderas = $sudadera->convertirDatos($datos);
+                    for ($i = 0; $i < count($sudaderas); $i++) {
+                        $id = $sudaderas[$i]->id;
+                        $indiceAleatorio = rand(0, count($sudaderas) - 1);
+                        $imagen = $sudaderas[$indiceAleatorio]->imagen;
                         // Aquí se imprime solamente la imagen
                     ?>
-                        <img src="https://http2.mlstatic.com/kit-30-camiseta-cinza-mescla-100-poliester-p-sublimaco-D_NQ_NP_783353-MLB31054611930_062019-F.jpg" alt="Camiseta" onclick="window.location.href='camiseta.php?id=<?= $id ?>'">
+                        <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./novedades.php?id=<?= $id ?>'">
                     <?php
                     }
                     ?>
                 </section>
                 <section class="detalles">
                     <?php
-                    for ($i = 0; $i < count($camisetas); $i++) {
-                        $titulo = $camisetas[$i]->nombre;
-                        $precio = $camisetas[$i]->precio;
-                        $descripcion = $camisetas[$i]->descripcion;
-                        // Aquí se imprime solamente los detalles de la camiseta
+                    for ($i = 0; $i < count($sudaderas); $i++) {
+                        $titulo = $sudaderas[$i]->nombre;
+                        $precio = $sudaderas[$i]->precio;
+                        $descripcion = $sudaderas[$i]->descripcion;
+                        // Aquí se imprime solamente los detalles de la sudadera
                     ?>
                         <div class="div-detalles">
+                            <h2><?= $titulo ?></h2>
                             <h2><?= $precio ?>€</h2>
-                            <img src="../img/tallas.png" alt="" class="tallas">
-                            <p><?= $titulo ?></p>
-                            <p><?= $descripcion ?></p>
+                            <h3><?= $descripcion ?></h3>
                         </div>
                     <?php
                     }
                     ?>
                 </section>
-                <!-- Aquí puedes seguir con cualquier otro contenido que desees agregar -->
-            </div>
-
-            <!-- galeria1 -->
-            <!-- <div class="galeria-carrusel1">
-                <section class="imagenes">
-                    <img src="../img/imagen1.png" alt="" onclick="window.location.href=''">
-                    <img src="../img/imagen2.png" alt="">
-                    <img src="../img/imagen3.png" alt="">
-                    <img src="../img/imagen4.png" alt="">
-                </section>
-                <section class="detalles">
-                    <div class="div-detalles">
-                        <h2>10€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
-                    <div class="div-detalles">
-                        <h2>10€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
-                    <div class="div-detalles">
-                        <h2>10€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
-                    <div class="div-detalles">
-                        <h2>10€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
-                </section>
                 <h4>1</h4>
-            </div> -->
+            </div>
             <!-- galeria2 -->
             <div class="galeria-carrusel1">
                 <section class="imagenes">
-                    <img src="../img/imagen2.png" alt="">
-                    <img src="../img/imagen1.png" alt="">
-                    <img src="../img/imagen4.png" alt="">
-                    <img src="../img/imagen3.png" alt="">
+                    <?php
+                    $datos = $sudadera->obtenerDatos("SELECT * FROM novedades WHERE activa = 1 LIMIT 4,4");
+                    $sudaderas = $sudadera->convertirDatos($datos);
+                    for ($i = 0; $i < count($sudaderas); $i++) {
+                        $id = $sudaderas[$i]->id;
+                        $indiceAleatorio = rand(0, count($sudaderas) - 1);
+                        $imagen = $sudaderas[$indiceAleatorio]->imagen;
+                        // Aquí se imprime solamente la imagen
+                    ?>
+                        <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./novedades.php?id=<?= $id ?>'">
+                    <?php
+                    }
+                    ?>
                 </section>
                 <section class="detalles">
-                    <div class="div-detalles">
-                        <h2>15€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
-                    <div class="div-detalles">
-                        <h2>15€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
-                    <div class="div-detalles">
-                        <h2>15€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
-                    <div class="div-detalles">
-                        <h2>15€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
+                    <?php
+                    for ($i = 0; $i < count($sudaderas); $i++) {
+                        $titulo = $sudaderas[$i]->nombre;
+                        $precio = $sudaderas[$i]->precio;
+                        $descripcion = $sudaderas[$i]->descripcion;
+                        // Aquí se imprime solamente los detalles de la sudadera
+                    ?>
+                        <div class="div-detalles">
+                            <h2><?= $titulo ?></h2>
+                            <h2><?= $precio ?>€</h2>
+                            <h3><?= $descripcion ?></h3>
+                        </div>
+                    <?php
+                    }
+                    ?>
                 </section>
                 <h4>2</h4>
             </div>
             <!-- galeria3 -->
             <div class="galeria-carrusel1">
                 <section class="imagenes">
-                    <img src="../img/imagen3.png" alt="">
-                    <img src="../img/imagen1.png" alt="">
-                    <img src="../img/imagen4.png" alt="">
-                    <img src="../img/imagen2.png" alt="">
+                    <?php
+                    $datos = $sudadera->obtenerDatos("SELECT * FROM novedades WHERE activa = 1 LIMIT 8,4");
+                    $sudaderas = $sudadera->convertirDatos($datos);
+                    for ($i = 0; $i < count($sudaderas); $i++) {
+                        $id = $sudaderas[$i]->id;
+                        $indiceAleatorio = rand(0, count($sudaderas) - 1);
+                        $imagen = $sudaderas[$indiceAleatorio]->imagen;
+                        // Aquí se imprime solamente la imagen
+                    ?>
+                        <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./novedades.php?id=<?= $id ?>'">
+                    <?php
+                    }
+                    ?>
                 </section>
                 <section class="detalles">
-                    <div class="div-detalles">
-                        <h2>20€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
-                    <div class="div-detalles">
-                        <h2>20€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
-                    <div class="div-detalles">
-                        <h2>20€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
-                    <div class="div-detalles">
-                        <h2>20€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
+                    <?php
+                    for ($i = 0; $i < count($sudaderas); $i++) {
+                        $titulo = $sudaderas[$i]->nombre;
+                        $precio = $sudaderas[$i]->precio;
+                        $descripcion = $sudaderas[$i]->descripcion;
+                        // Aquí se imprime solamente los detalles de la sudadera
+                    ?>
+                        <div class="div-detalles">
+                            <h2><?= $titulo ?></h2>
+                            <h2><?= $precio ?>€</h2>
+                            <h3><?= $descripcion ?></h3>
+                        </div>
+                    <?php
+                    }
+                    ?>
                 </section>
                 <h4>3</h4>
             </div>
@@ -190,84 +176,108 @@ $camisetas = $camiseta->convertirDatos($datos);
             <!-- galeria1 -->
             <div class="galeria-carrusel2">
                 <section class="imagenes">
-                    <img src="../img/imagen1.png" alt="">
-                    <img src="../img/imagen2.png" alt="">
-                    <img src="../img/imagen3.png" alt="">
-                    <img src="../img/imagen4.png" alt="">
+                    <?php
+                    $datos = $sudadera->obtenerDatos("SELECT * FROM destacados WHERE activa = 1 LIMIT 4");
+                    $sudaderas = $sudadera->convertirDatos($datos);
+                    for ($i = 0; $i < count($sudaderas); $i++) {
+                        $id = $sudaderas[$i]->id;
+                        $indiceAleatorio = rand(0, count($sudaderas) - 1);
+                        $imagen = $sudaderas[$indiceAleatorio]->imagen;
+                        // Aquí se imprime solamente la imagen
+                    ?>
+                        <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./destacados.php?id=<?= $id ?>'">
+                    <?php
+                    }
+                    ?>
                 </section>
                 <section class="detalles">
-                    <div class="div-detalles">
-                        <h2>10€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
-                    <div class="div-detalles">
-                        <h2>10€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
-                    <div class="div-detalles">
-                        <h2>10€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
-                    <div class="div-detalles">
-                        <h2>10€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
+                    <?php
+                    for ($i = 0; $i < count($sudaderas); $i++) {
+                        $titulo = $sudaderas[$i]->nombre;
+                        $precio = $sudaderas[$i]->precio;
+                        $descripcion = $sudaderas[$i]->descripcion;
+                        // Aquí se imprime solamente los detalles de la sudadera
+                    ?>
+                        <div class="div-detalles">
+                            <h2><?= $titulo ?></h2>
+                            <h2><?= $precio ?>€</h2>
+                            <h3><?= $descripcion ?></h3>
+                        </div>
+                    <?php
+                    }
+                    ?>
                 </section>
                 <h4>1</h4>
             </div>
             <!-- galeria2 -->
             <div class="galeria-carrusel2">
                 <section class="imagenes">
-                    <img src="../img/imagen2.png" alt="">
-                    <img src="../img/imagen1.png" alt="">
-                    <img src="../img/imagen4.png" alt="">
-                    <img src="../img/imagen3.png" alt="">
+                    <?php
+                    $datos = $sudadera->obtenerDatos("SELECT * FROM destacados WHERE activa = 1 LIMIT 4,4");
+                    $sudaderas = $sudadera->convertirDatos($datos);
+                    for ($i = 0; $i < count($sudaderas); $i++) {
+                        $id = $sudaderas[$i]->id;
+                        $indiceAleatorio = rand(0, count($sudaderas) - 1);
+                        $imagen = $sudaderas[$indiceAleatorio]->imagen;
+                        // Aquí se imprime solamente la imagen
+                    ?>
+                        <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./destacados.php?id=<?= $id ?>'">
+                    <?php
+                    }
+                    ?>
                 </section>
                 <section class="detalles">
-                    <div class="div-detalles">
-                        <h2>15€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
-                    <div class="div-detalles">
-                        <h2>15€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
-                    <div class="div-detalles">
-                        <h2>15€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
-                    <div class="div-detalles">
-                        <h2>15€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
+                    <?php
+                    for ($i = 0; $i < count($sudaderas); $i++) {
+                        $titulo = $sudaderas[$i]->nombre;
+                        $precio = $sudaderas[$i]->precio;
+                        $descripcion = $sudaderas[$i]->descripcion;
+                        // Aquí se imprime solamente los detalles de la sudadera
+                    ?>
+                        <div class="div-detalles">
+                            <h2><?= $titulo ?></h2>
+                            <h2><?= $precio ?>€</h2>
+                            <h3><?= $descripcion ?></h3>
+                        </div>
+                    <?php
+                    }
+                    ?>
                 </section>
                 <h4>2</h4>
             </div>
             <!-- galeria3 -->
             <div class="galeria-carrusel2">
                 <section class="imagenes">
-                    <img src="../img/imagen3.png" alt="">
-                    <img src="../img/imagen1.png" alt="">
-                    <img src="../img/imagen4.png" alt="">
-                    <img src="../img/imagen2.png" alt="">
+                    <?php
+                    $datos = $sudadera->obtenerDatos("SELECT * FROM destacados WHERE activa = 1 LIMIT 8,4");
+                    $sudaderas = $sudadera->convertirDatos($datos);
+                    for ($i = 0; $i < count($sudaderas); $i++) {
+                        $id = $sudaderas[$i]->id;
+                        $indiceAleatorio = rand(0, count($sudaderas) - 1);
+                        $imagen = $sudaderas[$indiceAleatorio]->imagen;
+                        // Aquí se imprime solamente la imagen
+                    ?>
+                        <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./destacados.php?id=<?= $id ?>'">
+                    <?php
+                    }
+                    ?>
                 </section>
                 <section class="detalles">
-                    <div class="div-detalles">
-                        <h2>20€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
-                    <div class="div-detalles">
-                        <h2>20€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
-                    <div class="div-detalles">
-                        <h2>20€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
-                    <div class="div-detalles">
-                        <h2>20€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
+                    <?php
+                    for ($i = 0; $i < count($sudaderas); $i++) {
+                        $titulo = $sudaderas[$i]->nombre;
+                        $precio = $sudaderas[$i]->precio;
+                        $descripcion = $sudaderas[$i]->descripcion;
+                        // Aquí se imprime solamente los detalles de la sudadera
+                    ?>
+                        <div class="div-detalles">
+                            <h2><?= $titulo ?></h2>
+                            <h2><?= $precio ?>€</h2>
+                            <h3><?= $descripcion ?></h3>
+                        </div>
+                    <?php
+                    }
+                    ?>
                 </section>
                 <h4>3</h4>
             </div>
@@ -284,84 +294,108 @@ $camisetas = $camiseta->convertirDatos($datos);
             <!-- galeria1 -->
             <div class="galeria-carrusel3">
                 <section class="imagenes">
-                    <img src="../img/imagen1.png" alt="">
-                    <img src="../img/imagen2.png" alt="">
-                    <img src="../img/imagen3.png" alt="">
-                    <img src="../img/imagen4.png" alt="">
+                    <?php
+                    $datos = $sudadera->obtenerDatos("SELECT * FROM ofertas WHERE activa = 1 LIMIT 4");
+                    $sudaderas = $sudadera->convertirDatos($datos);
+                    for ($i = 0; $i < count($sudaderas); $i++) {
+                        $id = $sudaderas[$i]->id;
+                        $indiceAleatorio = rand(0, count($sudaderas) - 1);
+                        $imagen = $sudaderas[$indiceAleatorio]->imagen;
+                        // Aquí se imprime solamente la imagen
+                    ?>
+                        <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./ofertas.php?id=<?= $id ?>'">
+                    <?php
+                    }
+                    ?>
                 </section>
                 <section class="detalles">
-                    <div class="div-detalles">
-                        <h2>10€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
-                    <div class="div-detalles">
-                        <h2>10€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
-                    <div class="div-detalles">
-                        <h2>10€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
-                    <div class="div-detalles">
-                        <h2>10€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
+                    <?php
+                    for ($i = 0; $i < count($sudaderas); $i++) {
+                        $titulo = $sudaderas[$i]->nombre;
+                        $precio = $sudaderas[$i]->precio;
+                        $descripcion = $sudaderas[$i]->descripcion;
+                        // Aquí se imprime solamente los detalles de la sudadera
+                    ?>
+                        <div class="div-detalles">
+                            <h2><?= $titulo ?></h2>
+                            <h2><?= $precio ?>€</h2>
+                            <h3><?= $descripcion ?></h3>
+                        </div>
+                    <?php
+                    }
+                    ?>
                 </section>
                 <h4>1</h4>
             </div>
             <!-- galeria2 -->
             <div class="galeria-carrusel3">
                 <section class="imagenes">
-                    <img src="../img/imagen2.png" alt="">
-                    <img src="../img/imagen1.png" alt="">
-                    <img src="../img/imagen4.png" alt="">
-                    <img src="../img/imagen3.png" alt="">
+                    <?php
+                    $datos = $sudadera->obtenerDatos("SELECT * FROM ofertas WHERE activa = 1 LIMIT 4,4");
+                    $sudaderas = $sudadera->convertirDatos($datos);
+                    for ($i = 0; $i < count($sudaderas); $i++) {
+                        $id = $sudaderas[$i]->id;
+                        $indiceAleatorio = rand(0, count($sudaderas) - 1);
+                        $imagen = $sudaderas[$indiceAleatorio]->imagen;
+                        // Aquí se imprime solamente la imagen
+                    ?>
+                        <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./ofertas.php?id=<?= $id ?>'">
+                    <?php
+                    }
+                    ?>
                 </section>
                 <section class="detalles">
-                    <div class="div-detalles">
-                        <h2>15€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
-                    <div class="div-detalles">
-                        <h2>15€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
-                    <div class="div-detalles">
-                        <h2>15€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
-                    <div class="div-detalles">
-                        <h2>15€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
+                    <?php
+                    for ($i = 0; $i < count($sudaderas); $i++) {
+                        $titulo = $sudaderas[$i]->nombre;
+                        $precio = $sudaderas[$i]->precio;
+                        $descripcion = $sudaderas[$i]->descripcion;
+                        // Aquí se imprime solamente los detalles de la sudadera
+                    ?>
+                        <div class="div-detalles">
+                            <h2><?= $titulo ?></h2>
+                            <h2><?= $precio ?>€</h2>
+                            <h3><?= $descripcion ?></h3>
+                        </div>
+                    <?php
+                    }
+                    ?>
                 </section>
                 <h4>2</h4>
             </div>
             <!-- galeria3 -->
             <div class="galeria-carrusel3">
                 <section class="imagenes">
-                    <img src="../img/imagen3.png" alt="">
-                    <img src="../img/imagen1.png" alt="">
-                    <img src="../img/imagen4.png" alt="">
-                    <img src="../img/imagen2.png" alt="">
+                    <?php
+                    $datos = $sudadera->obtenerDatos("SELECT * FROM ofertas WHERE activa = 1 LIMIT 8,4");
+                    $sudaderas = $sudadera->convertirDatos($datos);
+                    for ($i = 0; $i < count($sudaderas); $i++) {
+                        $id = $sudaderas[$i]->id;
+                        $indiceAleatorio = rand(0, count($sudaderas) - 1);
+                        $imagen = $sudaderas[$indiceAleatorio]->imagen;
+                        // Aquí se imprime solamente la imagen
+                    ?>
+                        <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./ofertas.php?id=<?= $id ?>'">
+                    <?php
+                    }
+                    ?>
                 </section>
                 <section class="detalles">
-                    <div class="div-detalles">
-                        <h2>20€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
-                    <div class="div-detalles">
-                        <h2>20€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
-                    <div class="div-detalles">
-                        <h2>20€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
-                    <div class="div-detalles">
-                        <h2>20€</h2>
-                        <img src="../img/tallas.png" alt="" class="tallas">
-                    </div class="div-detalles">
+                    <?php
+                    for ($i = 0; $i < count($sudaderas); $i++) {
+                        $titulo = $sudaderas[$i]->nombre;
+                        $precio = $sudaderas[$i]->precio;
+                        $descripcion = $sudaderas[$i]->descripcion;
+                        // Aquí se imprime solamente los detalles de la sudadera
+                    ?>
+                        <div class="div-detalles">
+                            <h2><?= $titulo ?></h2>
+                            <h2><?= $precio ?>€</h2>
+                            <h3><?= $descripcion ?></h3>
+                        </div>
+                    <?php
+                    }
+                    ?>
                 </section>
                 <h4>3</h4>
             </div>
