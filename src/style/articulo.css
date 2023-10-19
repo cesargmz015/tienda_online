@@ -1,0 +1,328 @@
+html,
+body {
+    /* height 100% para mantener el header pegado arriba y el footer pegado abajo si no hay mas contenido en la pagina */
+    /*este height:100% tambien influye en el comportamiento position:sticky*/
+    /* height: 100%; */
+    background-color: antiquewhite;
+    scroll-behavior: smooth;
+}
+
+body {
+    /*esto tambien en conjunto para lo mismo que heigh 100%*/
+    margin: 0;
+    grid-template-columns: min-content auto min-content;
+}
+
+.hr-header {
+    transition: margin-top 0.2s ease;
+}
+
+.hr-header,
+.hr-footer {
+    margin: 50px 5%;
+    border: none;
+    height: 2px;
+    background-color: black;
+}
+
+h1 {
+    text-align: center;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: antiquewhite;
+}
+
+.div_header {
+    display: grid;
+    grid-template-columns: 33.33% 33.33% 33.33%;
+    align-items: center;
+    text-align: center;
+}
+
+#logo_tienda {
+    width: 15%;
+}
+
+.input-container-search {
+    position: relative;
+}
+
+.icon {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: calc(50% + 5px);
+    transform: translateY(calc(-50% - 5px));
+}
+
+.input-search {
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    transition: .2s linear;
+    border: 2.5px solid black;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.input-search:focus {
+    outline: none;
+    border: 0.5px solid black;
+    box-shadow: -5px -5px 0px black;
+}
+
+.input-container-search:hover > .icon {
+    animation: anim 1s linear infinite;
+}
+
+@keyframes anim {
+
+    0%,
+    100% {
+        transform: translateY(calc(-50% - 5px)) scale(1);
+    }
+
+    50% {
+        transform: translateY(calc(-50% - 5px)) scale(1.1);
+    }
+}
+
+.botones_header > :first-child {
+    margin-right: 10px;
+}
+
+button {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: rgb(80, 22, 22);
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 17px;
+    padding: 16px;
+    width: 130px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+}
+
+button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+button span:after {
+    content: '»';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -15px;
+    transition: 0.5s;
+}
+
+button:hover span {
+    padding-right: 15px;
+}
+
+button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+article {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.main-container {
+    display: flex;
+    grid-template-columns: 50% 50%;
+    place-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.main-container > :first-child {
+    margin-right: 10%;
+}
+
+.imagen img {
+    width: 90%;
+    flex-grow: 1;
+    object-fit: cover;
+    transition: .5s ease;
+}
+
+.imagen img:hover {
+    cursor: crosshair;
+    width: 130%;
+}
+
+.tallas {
+    width: 200px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+}
+
+.tallas:hover {
+    background-color: #e8e8e8;
+}
+
+.tallas:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgb(1, 49, 62);
+}
+
+.tallas option {
+    font-size: 14px;
+}
+
+.descripcion_larga {
+    text-align: center;
+    font-size: large;
+    padding-left: 25%;
+    padding-right: 25%;
+}
+
+.div_footer {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    text-align: center;
+}
+
+.div_enlaces_footer {
+    display: grid;
+    place-content: center;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.icons_social_media {
+    width: 4%;
+}
+
+#login,
+#registro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.fondo {
+    background-color: rgba(0, 0, 0, 0.381);
+    width: 100%;
+    height: 100%;
+}
+
+.modal {
+    animation: modal 0.75s;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.oculto {
+    display: none;
+}
+
+@keyframes modal {
+    from {
+        opacity: 0;
+        /* si pones el primero y el segundo en porcentaje y negativo
+        caen los dos hacia abajo */
+        transform: translate(-50%, -200px);
+    }
+
+    to {
+        opacity: 1;
+        /* esto es para rotar */
+        /* transform: translate(-50%, -50%); */
+    }
+}
+
+.form {
+    background-color: #fff;
+    display: block;
+    padding: 1rem;
+    max-width: 350px;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.form-title {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    text-align: center;
+    color: #000;
+}
+
+.input-container {
+    position: relative;
+}
+
+.input-container input,
+.form button {
+    outline: none;
+    border: 1px solid #e5e7eb;
+    margin: 8px 0;
+}
+
+.input-container input {
+    background-color: #fff;
+    padding: 0;
+    height: 40px;
+    padding-right: 3rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    width: 300px;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.submit {
+    display: block;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    background-color: rgb(80, 22, 22);
+    color: #ffffff;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    width: 100%;
+    border-radius: 0.5rem;
+    text-transform: uppercase;
+}
+
+.terminos {
+    text-align: center;
+}
+
+.terminos label {
+    padding-left: 10px;
+}
+
+.copy {
+    display: grid;
+    place-content: center;
+}

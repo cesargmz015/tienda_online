@@ -13,7 +13,7 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda</title>
-    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../style/index.css">
     <script src="../js/functions.js"></script>
 </head>
 
@@ -53,7 +53,7 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
     </header>
     <main>
         <h1>Novedades</h1>
-        <!-- carrusel1 -->
+        <!-- carrusel1-novedades -->
         <div class="carrusel">
             <!-- galeria1 -->
             <div class="galeria-carrusel1">
@@ -65,9 +65,8 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
                         $id = $sudaderas[$i]->id;
                         $indiceAleatorio = rand(0, count($sudaderas) - 1);
                         $imagen = $sudaderas[$indiceAleatorio]->imagen;
-                        // Aquí se imprime solamente la imagen
                     ?>
-                        <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./novedades.php?id=<?= $id ?>'">
+                        <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./novedades.php?id=<?= $id ?>&imgIndex=<?= urlencode($imagen) ?>'">
                     <?php
                     }
                     ?>
@@ -78,7 +77,6 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
                         $titulo = $sudaderas[$i]->nombre;
                         $precio = $sudaderas[$i]->precio;
                         $descripcion = $sudaderas[$i]->descripcion;
-                        // Aquí se imprime solamente los detalles de la sudadera
                     ?>
                         <div class="div-detalles">
                             <h2><?= $titulo ?></h2>
@@ -103,7 +101,7 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
                         $imagen = $sudaderas[$indiceAleatorio]->imagen;
                         // Aquí se imprime solamente la imagen
                     ?>
-                        <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./novedades.php?id=<?= $id ?>'">
+                        <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./novedades.php?id=<?= $id ?>&imgIndex=<?= urlencode($imagen) ?>'">
                     <?php
                     }
                     ?>
@@ -139,7 +137,7 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
                         $imagen = $sudaderas[$indiceAleatorio]->imagen;
                         // Aquí se imprime solamente la imagen
                     ?>
-                        <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./novedades.php?id=<?= $id ?>'">
+                        <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./novedades.php?id=<?= $id ?>&imgIndex=<?= urlencode($imagen) ?>'">
                     <?php
                     }
                     ?>
@@ -171,7 +169,7 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
         <hr class="hr-main">
         <br>
         <h1>Destacados</h1>
-        <!-- carrusel2 -->
+        <!-- carrusel2-destacados -->
         <div class="carrusel">
             <!-- galeria1 -->
             <div class="galeria-carrusel2">
@@ -185,7 +183,7 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
                         $imagen = $sudaderas[$indiceAleatorio]->imagen;
                         // Aquí se imprime solamente la imagen
                     ?>
-                        <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./destacados.php?id=<?= $id ?>'">
+                        <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./destacados.php?id=<?= $id ?>&imgIndex=<?= urlencode($imagen) ?>'">
                     <?php
                     }
                     ?>
@@ -221,7 +219,7 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
                         $imagen = $sudaderas[$indiceAleatorio]->imagen;
                         // Aquí se imprime solamente la imagen
                     ?>
-                        <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./destacados.php?id=<?= $id ?>'">
+                        <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./destacados.php?id=<?= $id ?>&imgIndex=<?= urlencode($imagen) ?>'">
                     <?php
                     }
                     ?>
@@ -257,7 +255,7 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
                         $imagen = $sudaderas[$indiceAleatorio]->imagen;
                         // Aquí se imprime solamente la imagen
                     ?>
-                        <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./destacados.php?id=<?= $id ?>'">
+                        <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./destacados.php?id=<?= $id ?>&imgIndex=<?= urlencode($imagen) ?>'">
                     <?php
                     }
                     ?>
@@ -289,7 +287,7 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
         <hr class="hr-main">
         <br>
         <h1>Ofertas</h1>
-        <!-- carrusel3 -->
+        <!-- carrusel3-ofertas -->
         <div class="carrusel">
             <!-- galeria1 -->
             <div class="galeria-carrusel3">
@@ -303,7 +301,7 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
                         $imagen = $sudaderas[$indiceAleatorio]->imagen;
                         // Aquí se imprime solamente la imagen
                     ?>
-                        <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./ofertas.php?id=<?= $id ?>'">
+                        <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./ofertas.php?id=<?= $id ?>&imgIndex=<?= urlencode($imagen) ?>'">
                     <?php
                     }
                     ?>
@@ -339,7 +337,7 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
                         $imagen = $sudaderas[$indiceAleatorio]->imagen;
                         // Aquí se imprime solamente la imagen
                     ?>
-                        <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./ofertas.php?id=<?= $id ?>'">
+                        <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./ofertas.php?id=<?= $id ?>&imgIndex=<?= urlencode($imagen) ?>'">
                     <?php
                     }
                     ?>
@@ -375,7 +373,7 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
                         $imagen = $sudaderas[$indiceAleatorio]->imagen;
                         // Aquí se imprime solamente la imagen
                     ?>
-                        <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./ofertas.php?id=<?= $id ?>'">
+                        <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./ofertas.php?id=<?= $id ?>&imgIndex=<?= urlencode($imagen) ?>'">
                     <?php
                     }
                     ?>
