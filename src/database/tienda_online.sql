@@ -91,7 +91,8 @@ CREATE TABLE `usuario` (
   `telefono` int(9) NOT NULL,
   `correo` varchar(20) NOT NULL,
   `contraseña` varchar(32) NOT NULL,
-  `dni` varchar(9) NOT NULL
+  `dni` varchar(9) NOT NULL,
+  `rol` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -203,6 +204,11 @@ INSERT INTO ofertas (nombre, descripcion, precio, imagen, activa, fecha) VALUES 
 INSERT INTO ofertas (nombre, descripcion, precio, imagen, activa, fecha) VALUES ("sudadera10", "precio buenísimo!", 15, "../img/imagen2.png", 1, now());
 INSERT INTO ofertas (nombre, descripcion, precio, imagen, activa, fecha) VALUES ("sudadera11", "calidad-precio", 15, "../img/imagen3.png", 1, now());
 INSERT INTO ofertas (nombre, descripcion, precio, imagen, activa, fecha) VALUES ("sudadera12", "ofertón!", 15, "../img/imagen4.png", 1, now());
+
+--
+--insertar admin a la tabla usuario
+--
+INSERT INTO usuario (nombre, apellidos, direccion, telefono, correo, contraseña, dni, token, rol) VALUES ('admin', 'admin', 'direccion', '123456789', 'admin@gmail.com', '123456789', '12345678A', '', '1');
 
 --
 -- insertar el texto de ejemplo de las columnas `descripcion_larga` de cada tabla

@@ -18,6 +18,7 @@ if (isset($_GET["id"])) {
     <title>Tienda</title>
     <link rel="stylesheet" href="../style/articulo.css">
     <script src="../js/functions.js"></script>
+    <link rel="shortcut icon" href="../img/logo-tienda.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -27,8 +28,8 @@ if (isset($_GET["id"])) {
     <header>
         <div class="div_header">
             <div>
-                <a href="./index.html">
-                    <img src="https://static.thenounproject.com/png/127211-200.png" alt="logo_tienda" id="logo_tienda">
+                <a href="./index.php">
+                    <img src="../img/logo-tienda.png" alt="logo_tienda" id="logo_tienda">
                 </a href="./index.html">
             </div>
             <div class="input-container-search">
@@ -55,6 +56,7 @@ if (isset($_GET["id"])) {
         <hr class="hr-header">
     </header>
     <main>
+        <h2 class="seccion-articulo">de ofertas</h2>
         <article>
             <section class="main-container">
                 <?php
@@ -93,6 +95,7 @@ if (isset($_GET["id"])) {
                         <option value="XL">XL</option>
                         <option value="XXL">XXL</option>
                     </select>
+                    <br>
                     <br>
                     <br>
                     <a href="">

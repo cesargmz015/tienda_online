@@ -136,6 +136,10 @@ button:hover span:after {
     right: 0;
 }
 
+.seccion-articulo {
+    text-align: center;
+}
+
 article {
     padding-top: 0;
     padding-bottom: 0;

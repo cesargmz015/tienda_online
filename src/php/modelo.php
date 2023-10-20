@@ -19,6 +19,9 @@ class conexionBBDD {
             $lineas = $consulta->affected_rows($consulta);
             return "Se han actualizado $lineas registros";
         }*/
+    function insertarDatos($insercion) {
+        return mysqli_query($this->conn, $insercion);
+    }
 }
 
 

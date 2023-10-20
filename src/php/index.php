@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("./modelo.php");
 $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
 //$datos = $sudadera->obtenerDatos("SELECT * FROM sudadera ORDER BY fecha LIMIT 4");
@@ -15,17 +16,37 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
     <title>Tienda</title>
     <link rel="stylesheet" href="../style/index.css">
     <script src="../js/functions.js"></script>
+    <link rel="shortcut icon" href="../img/logo-tienda.ico" type="image/x-icon">
 </head>
 
 <body>
     <div class="h1">
         <h1>TIENDA ONLINE</h1>
     </div class="h1">
+
+    <?php
+    if (isset($_SESSION["id"])) { ?>
+        <div class="login-head">
+            <div class="nombre-usuario">Bienvenido <?= $_SESSION["nombre"] ?>
+            </div>
+            <div class="botones-logout-admin">
+                <a href="logout.php">
+                    <button type="button" class="logout">logout</button>
+                </a>
+                <?php if ($_SESSION["rol"] > 0) { ?>
+                    <a class="administrar">
+                        <button type="button">Administrar usuarios</button>
+                    </a>
+                <?php } ?>
+            </div>
+        </div>
+    <?php } ?>
+
     <header>
         <div class="div_header">
             <div>
-                <a href="./index.html">
-                    <img src="https://static.thenounproject.com/png/127211-200.png" alt="logo_tienda" id="logo_tienda">
+                <a href="./index.php">
+                    <img src="../img/logo-tienda.png" alt="logo_tienda" id="logo_tienda">
                 </a href="./index.html">
             </div>
             <div class="input-container-search">

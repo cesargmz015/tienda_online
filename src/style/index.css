@@ -402,3 +402,25 @@ a {
     display: grid;
     place-content: center;
 }
+
+.login-head {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: center;
+}
+
+.nombre-usuario {
+    padding: 0;
+    text-align: center;
+    margin-right: 30%;
+}
+
+.botones-logout-admin {
+    padding: 0;
+    text-align: center;
+    margin-left: 33%;
+}
+
+.botones-logout-admin > :first-child {
+    margin-right: 10px;
+}
