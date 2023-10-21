@@ -1,5 +1,4 @@
 <?php
-session_start();
 require("./modelo.php");
 
 $email = $_GET["email"];
@@ -38,16 +37,19 @@ if ($email_valido == true && $password_valido == true) {
     $conexion = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
     $datos = $conexion->obtenerDatos("SELECT * FROM usuario WHERE correo='$email' AND contraseña='$password'");
     if ($datos->num_rows < 1) {
-        echo "ERROR: El correo y la contraseña no coinciden, o no existe el usuario";
+        echo "ERROR: correo o contraseña incorrectos";
+?>
+        <a href="./index.php">
+            <button type="button">volver</button>
+        </a>
+<?php
     } else {
         $usuario = $conexion->convertirDatos($datos);
+        session_start();
         $_SESSION["id"] = $usuario[0]->id;
         $_SESSION["nombre"] = $usuario[0]->nombre;
         $_SESSION["rol"] = $usuario[0]->rol;
-        echo "Te has logueado correctamente";
+        header('Location: ./index.php');
+        exit; // Es importante llamar a exit después de header para asegurarte de que no se ejecute más código después de la redirección.
     }
 }
-?>
-<a href="./index.php">
-    <button type="button">volver</button>
-</a>

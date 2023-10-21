@@ -63,10 +63,14 @@ $terminos_aceptados = comprobacion::terminos_aceptados($terminos);
 
 if ($email_valido == true && $password_valido == true && $campos_validos == true && $terminos_aceptados == true) {
     $conexion = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
-    $token = token::generadorDeToken(15);
-    $insertar_usuario = $conexion->insertarDatos("INSERT INTO usuario (nombre, apellidos, direccion, telefono, correo, contraseña, dni, token, rol) VALUES ('$nombre', '$apellidos', '$direccion', '$telefono', '$correo', '$contraseña', '$dni', '$token', '0')");
-
-    echo "usuario registrado correctamente";
+    $existe_usuario = $conexion->obtenerDatos("SELECT * FROM usuario WHERE correo='$correo'");
+    if ($existe_usuario->num_rows >= 1) {
+        echo "ERROR: Este usuario ya está registrado";
+    } else {
+        $token = token::generadorDeToken(15);
+        $insertar_usuario = $conexion->insertarDatos("INSERT INTO usuario (nombre, apellidos, direccion, telefono, correo, contraseña, dni, token, rol) VALUES ('$nombre', '$apellidos', '$direccion', '$telefono', '$correo', '$contraseña', '$dni', '$token', '0')");
+        echo "usuario registrado correctamente";
+    }
 }
 ?>
 <a href="./index.php">

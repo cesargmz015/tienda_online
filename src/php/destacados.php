@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('./modelo.php');
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
@@ -17,7 +18,7 @@ if (isset($_GET["id"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda</title>
     <link rel="stylesheet" href="../style/articulo.css">
-    <script src="../js/functions.js"></script>
+    <script src="../js/functions.js" defer></script>
     <link rel="shortcut icon" href="../img/logo-tienda.ico" type="image/x-icon">
 </head>
 
@@ -48,10 +49,21 @@ if (isset($_GET["id"])) {
                     </svg>
                 </span>
             </div>
-            <div class="botones_header">
-                <button type="button" id="boton-login"><span>Login</span></button>
-                <button type="button" id="boton-registro"><span>Sign up</span></button>
-            </div>
+            <?php
+            if (isset($_SESSION["id"])) { ?>
+                <div class="botones_header">
+                    Bienvenido <?= $_SESSION["nombre"] ?>
+                    <button type="button" onclick="window.location.href='./logout.php'"><span>Logout</span></button>
+                    <?php if ($_SESSION["rol"] > 0) { ?>
+                        <button type="button" onclick="window.location.href=''"><span>Administrar usuarios</span></button>
+                    <?php } ?>
+                </div>
+            <?php } else { ?>
+                <div class="botones_header">
+                    <button type="button" id="boton-login"><span>Login</span></button>
+                    <button type="button" id="boton-registro"><span>Sign up</span></button>
+                </div>
+            <?php } ?>
         </div>
         <hr class="hr-header">
     </header>

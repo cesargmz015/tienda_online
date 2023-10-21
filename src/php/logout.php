@@ -1,8 +1,15 @@
 <?php
 session_start();
-session_destroy();
-echo "has cerrado sesion correctamente";
+
+if (isset($_SESSION["id"])) {  // Suponiendo que "id" es una variable de sesión que estableces al iniciar sesión.
+    session_destroy();
+    header('Location: ./index.php');
+    exit; // Es importante llamar a exit después de header.
+} else {
+    echo "ERROR: cierre de sesion fallido";
 ?>
-<a href="./index.php">
-    <button type="button">volver</button>
-</a>
+    <a href="./index.php">
+        <button type="button">volver</button>
+    </a>
+<?php }
+?>
