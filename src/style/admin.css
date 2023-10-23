@@ -1,0 +1,12 @@
+.form-sudaderas,
+.form-usuarios,
+.div-botones {
+    text-align: center;
+}
+
+.div-botones {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: white;
+}
