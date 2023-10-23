@@ -2,7 +2,7 @@
 session_start();
 require_once('./modelo.php');
 if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1) {
-    $conexionBBDD = new conexionBBDD("root", "", "127.0.0.1:3307", "tienda_online");
+    $conexionBBDD = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
 ?>
 
     <!DOCTYPE html>
@@ -12,7 +12,7 @@ if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Admin</title>
-        <link rel="stylesheet" href="../style/admin.css">
+        <link rel="stylesheet" href="../styles/admin.css">
         <script src="../js/admin.js"></script>
     </head>
 
@@ -21,12 +21,8 @@ if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1) {
             <div class="div-botones">
                 <button type="button" id="boton-usuarios"><span>Usuarios</span></button>
                 <button type="button" id="boton-articulos"><span>Articulos</span></button>
-                <?php
-                //TODO: Aqui añadir los botones de editar o eliminar si existe algun checkbox checked
-                // if (condition) {
-
-                // }
-                ?>
+                <button type="button" id="boton-editar"><span>Editar</span></button>
+                <button type="button" id="boton-eliminar"><span>Eliminar</span></button>
             </div>
             <div class="div-form">
                 <form action="" method="get" class="form-usuarios" id="form-usuarios">
@@ -49,16 +45,20 @@ if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1) {
                         }
                     ?>
                         <br><br>
-                        <p class="parrafo-datos"><input type="checkbox" name="checkbox" id="checkbox"> <?= $id ?>, <?= $nombre ?>, <?= $apellidos ?>, <?= $direccion ?>, <?= $telefono ?>, <?= $correo ?>, <?= $contraseña ?>, <?= $dni ?>, <?= $token ?>, <?= $rol ?></p>
+                        <p class="parrafo-datos">
+                            <input type="radio" name="seleccion_usuarios" value="<?= $id ?>">
+                            <?= $id ?>, <?= $nombre ?>, <?= $apellidos ?>, <?= $direccion ?>, <?= $telefono ?>, <?= $correo ?>, <?= $contraseña ?>, <?= $dni ?>, <?= $token ?>, <?= $rol ?>
+                        </p>
                     <?php
                     }
                     ?>
                 </form>
-                <form action="" method="get" class="form-usuarios" id="form-sudaderas">
+                <form action="" method="get" class="form-sudaderas" id="form-sudaderas">
                     <?php
                     $datos = $conexionBBDD->obtenerDatos("SELECT * FROM novedades");
                     $sudaderas = $conexionBBDD->convertirDatos($datos);
                     ?>
+                    <br>
                     <h2>Seccion novedades</h2>
                     <?php
                     for ($i = 0; $i < count($sudaderas); $i++) {
@@ -72,12 +72,16 @@ if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1) {
                         $descripcion_larga = $sudaderas[$i]->descripcion_larga;
                     ?>
                         <br>
-                        <p class="parrafo-datos"><input type="checkbox" name="checkbox" id="checkbox-sudaderas"> <?= $id ?>, <?= $nombre ?>, <?= $descripcion ?>, <?= $precio ?>, <?= $imagen ?>, <?= $activa ?>, <?= $fecha ?>, <?= $descripcion_larga ?></p>
+                        <p class="parrafo-datos">
+                            <input type="radio" name="seleccion_novedades" value="<?= $id ?>">
+                            <?= $id ?>, <?= $nombre ?>, <?= $descripcion ?>, <?= $precio ?>, <?= $imagen ?>, <?= $activa ?>, <?= $fecha ?>, <?= $descripcion_larga ?>
+                        </p>
                     <?php
                     }
                     $datos = $conexionBBDD->obtenerDatos("SELECT * FROM destacados");
                     $sudaderas = $conexionBBDD->convertirDatos($datos);
                     ?>
+                    <br>
                     <h2>Seccion destacados</h2>
                     <?php
                     for ($i = 0; $i < count($sudaderas); $i++) {
@@ -91,12 +95,16 @@ if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1) {
                         $descripcion_larga = $sudaderas[$i]->descripcion_larga;
                     ?>
                         <br>
-                        <p class="parrafo-datos"><input type="checkbox" name="checkbox" id="checkbox-sudaderas"> <?= $id ?>, <?= $nombre ?>, <?= $descripcion ?>, <?= $precio ?>, <?= $imagen ?>, <?= $activa ?>, <?= $fecha ?>, <?= $descripcion_larga ?></p>
+                        <p class="parrafo-datos">
+                            <input type="radio" name="seleccion_destacados" value="<?= $id ?>">
+                            <?= $id ?>, <?= $nombre ?>, <?= $descripcion ?>, <?= $precio ?>, <?= $imagen ?>, <?= $activa ?>, <?= $fecha ?>, <?= $descripcion_larga ?>
+                        </p>
                     <?php
                     }
                     $datos = $conexionBBDD->obtenerDatos("SELECT * FROM ofertas");
                     $sudaderas = $conexionBBDD->convertirDatos($datos);
                     ?>
+                    <br>
                     <h2>Seccion ofertas</h2>
                     <?php
                     for ($i = 0; $i < count($sudaderas); $i++) {
@@ -110,11 +118,31 @@ if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1) {
                         $descripcion_larga = $sudaderas[$i]->descripcion_larga;
                     ?>
                         <br>
-                        <p class="parrafo-datos"><input type="checkbox" name="checkbox" id="checkbox-sudaderas"> <?= $id ?>, <?= $nombre ?>, <?= $descripcion ?>, <?= $precio ?>, <?= $imagen ?>, <?= $activa ?>, <?= $fecha ?>, <?= $descripcion_larga ?></p>
+                        <p class="parrafo-datos"><input type="radio" name="seleccion_ofertas" value="<?= $id ?>">
+                            <?= $id ?>, <?= $nombre ?>, <?= $descripcion ?>, <?= $precio ?>, <?= $imagen ?>, <?= $activa ?>, <?= $fecha ?>, <?= $descripcion_larga ?></p>
                     <?php
                     }
-                    // //TODO: genera un codigo para recoger todos los checkboxes vinculados a su $id que estan checked de todos articulos
+                    //*genera un codigo para recoger todos los checkboxes vinculados a su $id que estan checked
+                    if (isset($_GET['Eliminar'])) {
+                        if (isset($_GET['seleccion_usuarios'])) {
+                            $id_seleccionado = $_GET['seleccion_usuarios'];
+                            $datos = $conexionBBDD->obtenerDatos("SELECT * FROM usuario WHERE id=$id_seleccionado");
+                            $usuarios = $conexionBBDD->convertirDatos($datos);
+                            var_dump($usuarios);
+                        }
 
+                        //eliminar articulos
+                        //     if (isset($_GET['seleccion_usuarios'])) {
+                        //         $id_seleccionado = $_GET['seleccion_usuarios'];
+                        //         // Edita en la tabla de usuarios
+                        //     } elseif (isset($_GET['seleccion_novedades'])) {
+                        //         $id_seleccionado = $_GET['seleccion_novedades'];
+                        //     } elseif (isset($_GET['seleccion_destacados'])) {
+                        //         $id_seleccionado = $_GET['seleccion_destacados'];
+                        //     } elseif (isset($_GET['seleccion_ofertas'])) {
+                        //         $id_seleccionado = $_GET['seleccion_ofertas'];
+                        //     }
+                        // }
                     ?>
                 </form>
             </div>
@@ -133,3 +161,4 @@ if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1) {
     <h1>Not Found</h1>
     <p>The requested URL was not found on this server.</p>
 <?php }
+                }

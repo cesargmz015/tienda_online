@@ -17,7 +17,7 @@ if (isset($_GET["id"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda</title>
-    <link rel="stylesheet" href="../style/articulo.css">
+    <link rel="stylesheet" href="../styles/articulo.css">
     <script src="../js/functions.js" defer></script>
     <link rel="shortcut icon" href="../img/logo-tienda.ico" type="image/x-icon">
 </head>
@@ -55,7 +55,7 @@ if (isset($_GET["id"])) {
                     Bienvenido <?= $_SESSION["nombre"] ?>
                     <button type="button" onclick="window.location.href='./logout.php'"><span>Logout</span></button>
                     <?php if ($_SESSION["rol"] > 0) { ?>
-                        <button type="button" onclick="window.location.href=''"><span>Administrar usuarios</span></button>
+                        <button type="button" onclick="window.location.href='./admin.php'"><span>Admin</span></button>
                     <?php } ?>
                 </div>
             <?php } else { ?>

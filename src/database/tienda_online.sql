@@ -37,7 +37,7 @@ CREATE TABLE `novedades` (
   `imagen` varchar(30) NOT NULL,
   `activa` tinyint(1) NOT NULL,
   `fecha` date NOT NULL,
-  `descripcion_larga` varchar(100) NULL
+  `descripcion_larga` varchar(100000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
@@ -55,7 +55,7 @@ CREATE TABLE `destacados` (
   `imagen` varchar(30) NOT NULL,
   `activa` tinyint(1) NOT NULL,
   `fecha` date NOT NULL,
-  `descripcion_larga` varchar(100) NULL
+  `descripcion_larga` varchar(100000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
@@ -73,7 +73,7 @@ CREATE TABLE `ofertas` (
   `imagen` varchar(30) NOT NULL,
   `activa` tinyint(1) NOT NULL,
   `fecha` date NOT NULL,
-  `descripcion_larga` varchar(100) NULL
+  `descripcion_larga` varchar(100000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
@@ -92,6 +92,7 @@ CREATE TABLE `usuario` (
   `correo` varchar(20) NOT NULL,
   `contraseña` varchar(32) NOT NULL,
   `dni` varchar(9) NOT NULL,
+  `token` varchar(15) NULL,
   `rol` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -206,9 +207,10 @@ INSERT INTO ofertas (nombre, descripcion, precio, imagen, activa, fecha) VALUES 
 INSERT INTO ofertas (nombre, descripcion, precio, imagen, activa, fecha) VALUES ("sudadera12", "ofertón!", 15, "../img/imagen4.png", 1, now());
 
 --
---insertar admin a la tabla usuario
+-- insertar admin y usuario normal de ejemplo a la tabla usuario
 --
-INSERT INTO usuario (nombre, apellidos, direccion, telefono, correo, contraseña, dni, token, rol) VALUES ('admin', 'admin', 'direccion', '123456789', 'admin@gmail.com', '123456789', '12345678A', '', '1');
+INSERT INTO usuario (nombre, apellidos, direccion, telefono, correo, contraseña, dni, token, rol) VALUES ('admin', 'admin', 'direccion', '623456789', 'admin@gmail.com', '123456789', '12345678A', '', 1);
+INSERT INTO usuario (nombre, apellidos, direccion, telefono, correo, contraseña, dni, token, rol) VALUES ('cesar', 'gomez', 'direccion', '623456789', 'c@gmail.com', '123456789', '12345678A', '', 0);
 
 --
 -- insertar el texto de ejemplo de las columnas `descripcion_larga` de cada tabla

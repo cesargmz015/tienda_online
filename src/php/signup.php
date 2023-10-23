@@ -68,7 +68,7 @@ if ($email_valido == true && $password_valido == true && $campos_validos == true
         echo "ERROR: Este usuario ya está registrado";
     } else {
         $token = token::generadorDeToken(15);
-        $insertar_usuario = $conexion->insertarDatos("INSERT INTO usuario (nombre, apellidos, direccion, telefono, correo, contraseña, dni, token, rol) VALUES ('$nombre', '$apellidos', '$direccion', '$telefono', '$correo', '$contraseña', '$dni', '$token', '0')");
+        $insertar_usuario = $conexion->insertarDatos("INSERT INTO usuario (nombre, apellidos, direccion, telefono, correo, contraseña, dni, token, rol) VALUES ('$nombre', '$apellidos', '$direccion', '$telefono', '$correo', '$contraseña', '$dni', '$token', 0)");
         echo "usuario registrado correctamente";
     }
 }

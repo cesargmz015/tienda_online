@@ -14,7 +14,7 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda</title>
-    <link rel="stylesheet" href="../style/index.css">
+    <link rel="stylesheet" href="../styles/index.css">
     <script src="../js/functions.js" defer></script>
     <link rel="shortcut icon" href="../img/logo-tienda.ico" type="image/x-icon">
 </head>
@@ -52,7 +52,7 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
                     Bienvenido <?= $_SESSION["nombre"] ?>
                     <button type="button" id="boton-logout" onclick="window.location.href='./logout.php'"><span>Logout</span></button>
                     <?php if ($_SESSION["rol"] > 0) { ?>
-                        <button type="button" id="boton-administrar" onclick="window.location.href=''"><span>Administrar usuarios</span></button>
+                        <button type="button" id="boton-administrar" onclick="window.location.href='./admin.php'"><span>Admin</span></button>
                     <?php } ?>
                 </div>
             <?php } else { ?>

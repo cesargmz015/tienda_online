@@ -22,6 +22,10 @@ class conexionBBDD {
     function insertarDatos($insercion) {
         return mysqli_query($this->conn, $insercion);
     }
+
+    function eliminarDatos($eliminacion) {
+        return mysqli_query($this->conn, $eliminacion);
+    }
 }
 
 
