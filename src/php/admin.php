@@ -24,6 +24,9 @@ if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1) {
                 </a>
                 <button type="button" id="boton-usuarios"><span>Usuarios</span></button>
                 <button type="button" id="boton-articulos"><span>Articulos</span></button>
+                <a href="./nuevo.php">
+                    <button type="button" id="boton-nuevo"><span>Nuevo Articulo</span></button>
+                </a>
             </div>
             <div class="div-form">
                 <form action="" method="get" class="form-usuarios" id="form-usuarios">
