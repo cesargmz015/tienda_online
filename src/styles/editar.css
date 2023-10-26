@@ -1,0 +1,15 @@
+table {
+    margin: auto;
+}
+
+th {
+    padding: 40px;
+}
+
+td {
+    padding: 15px;
+}
+
+form {
+    text-align: center;
+}

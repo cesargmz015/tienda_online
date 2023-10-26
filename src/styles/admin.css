@@ -10,3 +10,19 @@
     z-index: 1;
     background-color: white;
 }
+
+table {
+    margin: auto;
+}
+
+th {
+    padding: 40px;
+}
+
+td {
+    padding: 15px;
+}
+
+h2 {
+    margin-top: 50px;
+}

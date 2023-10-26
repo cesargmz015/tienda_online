@@ -19,16 +19,24 @@ if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1) {
     <body>
         <div class="div-container">
             <div class="div-botones">
+                <a href="../php/index.php">
+                    <button type="button">Home</button>
+                </a>
                 <button type="button" id="boton-usuarios"><span>Usuarios</span></button>
                 <button type="button" id="boton-articulos"><span>Articulos</span></button>
-                <button type="button" id="boton-editar"><span>Editar</span></button>
-                <button type="button" id="boton-eliminar"><span>Eliminar</span></button>
             </div>
             <div class="div-form">
                 <form action="" method="get" class="form-usuarios" id="form-usuarios">
+                    <h2>Usuarios</h2>
                     <?php
                     $datos = $conexionBBDD->obtenerDatos("SELECT * FROM usuario");
                     $usuarios = $conexionBBDD->convertirDatos($datos);
+
+                    echo "<table>";
+                    echo "<tr>";
+                    echo "<th>Id</th><th>Nombre</th><th>Apellidos</th><th>Direccion</th><th>Telefono</th><th>Correo</th><th>Contraseña</th><th>DNI</th><th>Token</th><th>Rol</th>";
+                    echo "</tr>";
+
                     for ($i = 0; $i < count($usuarios); $i++) {
                         $id = $usuarios[$i]->id;
                         $nombre = $usuarios[$i]->nombre;
@@ -43,24 +51,37 @@ if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1) {
                         if ($token == "") {
                             $token = "null";
                         }
-                    ?>
-                        <br><br>
-                        <p class="parrafo-datos">
-                            <input type="radio" name="seleccion_usuarios" value="<?= $id ?>">
-                            <?= $id ?>, <?= $nombre ?>, <?= $apellidos ?>, <?= $direccion ?>, <?= $telefono ?>, <?= $correo ?>, <?= $contraseña ?>, <?= $dni ?>, <?= $token ?>, <?= $rol ?>
-                        </p>
-                    <?php
+                        echo "<tr>";
+
+                        echo "<td>$id</td>";
+                        echo "<td>$nombre</td>";
+                        echo "<td>$apellidos</td>";
+                        echo "<td>$direccion</td>";
+                        echo "<td>$telefono</td>";
+                        echo "<td>$correo</td>";
+                        echo "<td>$contraseña</td>";
+                        echo "<td>$dni</td>";
+                        echo "<td>$token</td>";
+                        echo "<td>$rol</td>";
+
+                        echo '<td><a href="editar.php?id=' . $id . '&table=usuario"><button type="button">Editar</button></a></td>';
+                        echo '<td><a href="eliminar.php?id=' . $id . '&table=usuario"><button type="button">Eliminar</button></a></td>';
+
+                        echo "</tr>";
                     }
+                    echo "</table>"
                     ?>
                 </form>
                 <form action="" method="get" class="form-sudaderas" id="form-sudaderas">
+                    <h2>Seccion novedades</h2>
                     <?php
                     $datos = $conexionBBDD->obtenerDatos("SELECT * FROM novedades");
                     $sudaderas = $conexionBBDD->convertirDatos($datos);
-                    ?>
-                    <br>
-                    <h2>Seccion novedades</h2>
-                    <?php
+
+                    echo "<table>";
+                    echo "<tr>";
+                    echo "<th>Id</th><th>Nombre</th><th>Descripcion</th><th>Precio</th><th>Imagen</th><th>Activa</th><th>Fecha modificaciones</th><th>Descripcion larga</th>";
+                    echo "</tr>";
                     for ($i = 0; $i < count($sudaderas); $i++) {
                         $id = $sudaderas[$i]->id;
                         $nombre = $sudaderas[$i]->nombre;
@@ -70,20 +91,33 @@ if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1) {
                         $activa = $sudaderas[$i]->activa;
                         $fecha = $sudaderas[$i]->fecha;
                         $descripcion_larga = $sudaderas[$i]->descripcion_larga;
-                    ?>
-                        <br>
-                        <p class="parrafo-datos">
-                            <input type="radio" name="seleccion_novedades" value="<?= $id ?>">
-                            <?= $id ?>, <?= $nombre ?>, <?= $descripcion ?>, <?= $precio ?>, <?= $imagen ?>, <?= $activa ?>, <?= $fecha ?>, <?= $descripcion_larga ?>
-                        </p>
-                    <?php
+                        echo "<tr>";
+
+                        echo "<td>$id</td>";
+                        echo "<td>$nombre</td>";
+                        echo "<td>$descripcion</td>";
+                        echo "<td>$precio</td>";
+                        echo "<td>$imagen</td>";
+                        echo "<td>$activa</td>";
+                        echo "<td>$fecha</td>";
+                        echo "<td>$descripcion_larga</td>";
+
+                        echo '<td><a href="editar.php?id=' . $id . '&table=novedades"><button type="button">Editar</button></a></td>';
+                        echo '<td><a href="eliminar.php?id=' . $id . '&table=novedades"><button type="button">Eliminar</button></a></td>';
+
+                        echo "</tr>";
                     }
-                    $datos = $conexionBBDD->obtenerDatos("SELECT * FROM destacados");
-                    $sudaderas = $conexionBBDD->convertirDatos($datos);
+                    echo "</table>";
                     ?>
-                    <br>
                     <h2>Seccion destacados</h2>
                     <?php
+                    $datos = $conexionBBDD->obtenerDatos("SELECT * FROM destacados");
+                    $sudaderas = $conexionBBDD->convertirDatos($datos);
+
+                    echo "<table>";
+                    echo "<tr>";
+                    echo "<th>Id</th><th>Nombre</th><th>Descripcion</th><th>Precio</th><th>Imagen</th><th>Activa</th><th>Fecha modificaciones</th><th>Descripcion larga</th>";
+                    echo "</tr>";
                     for ($i = 0; $i < count($sudaderas); $i++) {
                         $id = $sudaderas[$i]->id;
                         $nombre = $sudaderas[$i]->nombre;
@@ -93,20 +127,32 @@ if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1) {
                         $activa = $sudaderas[$i]->activa;
                         $fecha = $sudaderas[$i]->fecha;
                         $descripcion_larga = $sudaderas[$i]->descripcion_larga;
-                    ?>
-                        <br>
-                        <p class="parrafo-datos">
-                            <input type="radio" name="seleccion_destacados" value="<?= $id ?>">
-                            <?= $id ?>, <?= $nombre ?>, <?= $descripcion ?>, <?= $precio ?>, <?= $imagen ?>, <?= $activa ?>, <?= $fecha ?>, <?= $descripcion_larga ?>
-                        </p>
-                    <?php
+                        echo "<tr>";
+
+                        echo "<td>$id</td>";
+                        echo "<td>$nombre</td>";
+                        echo "<td>$descripcion</td>";
+                        echo "<td>$precio</td>";
+                        echo "<td>$imagen</td>";
+                        echo "<td>$activa</td>";
+                        echo "<td>$fecha</td>";
+                        echo "<td>$descripcion_larga</td>";
+
+                        echo '<td><a href="editar.php?id=' . $id . '&table=destacados"><button type="button">Editar</button></a></td>';
+                        echo '<td><a href="eliminar.php?id=' . $id . '&table=destacados"><button type="button">Eliminar</button></a></td>';
+                        echo "</tr>";
                     }
-                    $datos = $conexionBBDD->obtenerDatos("SELECT * FROM ofertas");
-                    $sudaderas = $conexionBBDD->convertirDatos($datos);
+                    echo "</table>";
                     ?>
-                    <br>
                     <h2>Seccion ofertas</h2>
                     <?php
+                    $datos = $conexionBBDD->obtenerDatos("SELECT * FROM ofertas");
+                    $sudaderas = $conexionBBDD->convertirDatos($datos);
+
+                    echo "<table>";
+                    echo "<tr>";
+                    echo "<th>Id</th><th>Nombre</th><th>Descripcion</th><th>Precio</th><th>Imagen</th><th>Activa</th><th>Fecha modificaciones</th><th>Descripcion larga</th>";
+                    echo "</tr>";
                     for ($i = 0; $i < count($sudaderas); $i++) {
                         $id = $sudaderas[$i]->id;
                         $nombre = $sudaderas[$i]->nombre;
@@ -116,33 +162,23 @@ if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1) {
                         $activa = $sudaderas[$i]->activa;
                         $fecha = $sudaderas[$i]->fecha;
                         $descripcion_larga = $sudaderas[$i]->descripcion_larga;
-                    ?>
-                        <br>
-                        <p class="parrafo-datos"><input type="radio" name="seleccion_ofertas" value="<?= $id ?>">
-                            <?= $id ?>, <?= $nombre ?>, <?= $descripcion ?>, <?= $precio ?>, <?= $imagen ?>, <?= $activa ?>, <?= $fecha ?>, <?= $descripcion_larga ?></p>
-                    <?php
-                    }
-                    //*genera un codigo para recoger todos los checkboxes vinculados a su $id que estan checked
-                    if (isset($_GET['Eliminar'])) {
-                        if (isset($_GET['seleccion_usuarios'])) {
-                            $id_seleccionado = $_GET['seleccion_usuarios'];
-                            $datos = $conexionBBDD->obtenerDatos("SELECT * FROM usuario WHERE id=$id_seleccionado");
-                            $usuarios = $conexionBBDD->convertirDatos($datos);
-                            var_dump($usuarios);
-                        }
+                        echo "<tr>";
 
-                        //eliminar articulos
-                        //     if (isset($_GET['seleccion_usuarios'])) {
-                        //         $id_seleccionado = $_GET['seleccion_usuarios'];
-                        //         // Edita en la tabla de usuarios
-                        //     } elseif (isset($_GET['seleccion_novedades'])) {
-                        //         $id_seleccionado = $_GET['seleccion_novedades'];
-                        //     } elseif (isset($_GET['seleccion_destacados'])) {
-                        //         $id_seleccionado = $_GET['seleccion_destacados'];
-                        //     } elseif (isset($_GET['seleccion_ofertas'])) {
-                        //         $id_seleccionado = $_GET['seleccion_ofertas'];
-                        //     }
-                        // }
+                        echo "<td>$id</td>";
+                        echo "<td>$nombre</td>";
+                        echo "<td>$descripcion</td>";
+                        echo "<td>$precio</td>";
+                        echo "<td>$imagen</td>";
+                        echo "<td>$activa</td>";
+                        echo "<td>$fecha</td>";
+                        echo "<td>$descripcion_larga</td>";
+
+                        echo '<td><a href="editar.php?id=' . $id . '&table=ofertas"><button type="button">Editar</button></a></td>';
+                        echo '<td><a href="eliminar.php?id=' . $id . '&table=ofertas"><button type="button">Eliminar</button></a></td>';
+
+                        echo "</tr>";
+                    }
+                    echo "</table>"
                     ?>
                 </form>
             </div>
@@ -150,15 +186,8 @@ if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1) {
     </body>
 
     </html>
-    <?php
-
-
-
-    ?>
-
 
 <?php } else { ?>
     <h1>Not Found</h1>
     <p>The requested URL was not found on this server.</p>
 <?php }
-                }
