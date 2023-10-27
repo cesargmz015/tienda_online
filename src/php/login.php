@@ -33,7 +33,6 @@ $email_valido = comprobacion::comprobarEmail($email);
 $password_valido = comprobacion::comprobarLongitudPassword($minimo, $password);
 
 if ($email_valido == true && $password_valido == true) {
-    session_start();
     $conexion = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
     $datos = $conexion->obtenerDatos("SELECT * FROM usuario WHERE correo='$email' AND contraseña='$password'");
     if ($datos->num_rows < 1) {

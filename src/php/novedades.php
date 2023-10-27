@@ -3,6 +3,7 @@ session_start();
 require_once('./modelo.php');
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
+    $id_usuario = $_SESSION["id"];
     $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
     $datos = $sudadera->obtenerDatos("SELECT * FROM novedades WHERE id = '$id'");
     $sudaderas = $sudadera->convertirDatos($datos);
@@ -110,8 +111,8 @@ if (isset($_GET["id"])) {
                     <br>
                     <br>
                     <br>
-                    <a href="">
-                        <button type="button" class="carrito">Añadir al carrito</button>
+                    <a href="./carrito.php?id=<?= $id ?>&id_usuario=<?= $id_usuario ?>">
+                        <button type=" button" class="carrito"><span>Añadir 1 al carrito</span></button>
                     </a>
                 </div>
             </section>
