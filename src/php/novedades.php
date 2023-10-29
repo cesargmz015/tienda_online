@@ -3,7 +3,7 @@ session_start();
 require_once('./modelo.php');
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
-    $id_usuario = $_SESSION["id"];
+    $id_usuario = isset($_SESSION["id"]);
     $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
     $datos = $sudadera->obtenerDatos("SELECT * FROM novedades WHERE id = '$id'");
     $sudaderas = $sudadera->convertirDatos($datos);

@@ -1,12 +1,3 @@
-<?php
-session_start();
-require_once('./modelo.php');
-$conexionBBDD = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
-$id_producto = $_GET["id"];
-// $id_usuario = isset($_SESSION["id"]) ? $_SESSION["id"] : "null";
-$id_usuario = $_GET["id_usuario"];
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -17,7 +8,7 @@ $id_usuario = $_GET["id_usuario"];
     <script>
         const meterAlCarrito = (id_producto, id_usuario) => {
             //COMPROBAMOS SI EL USUARIO EXISTE
-            if (id_usuario === null || id_usuario === "null" || typeof id_usuario === "undefined") {
+            if (id_usuario == null || typeof id_usuario === "undefined" || id_usuario == 0) {
                 //COMPRUEBO SI HAY CARRITO
                 if (localStorage.getItem("carrito") == null) {
                     //SI NO HAY CARRITO CREO EL CARRITO Y AÑADO 1 DEL PRODUCTO
@@ -25,6 +16,7 @@ $id_usuario = $_GET["id_usuario"];
                         id_producto: id_producto,
                         cantidad: 1
                     }));
+                    console.log("añadido correctamente")
                 } else {
                     // SI HAY CARRITO
 
@@ -66,51 +58,23 @@ $id_usuario = $_GET["id_usuario"];
                     }
                 }
             } else {
-                <?php
-                $datos = $conexionBBDD->obtenerDatos("SELECT cantidad FROM carrito WHERE id_usuario = '$id_usuario' AND id_producto = '$id_producto'");
-
-                if ($datos->num_rows <= 0) {
-                    // El producto no está en el carrito, así que lo añadimos
-                    $insercion = $conexionBBDD->insertarDatos("INSERT INTO carrito (id_producto, id_usuario, cantidad) VALUES ('$id_producto', '$id_usuario', 1)");
-                } else {
-                    // El producto ya está en el carrito, así que incrementamos su cantidad
-                    $columna = $conexionBBDD->convertirDatos($datos);
-                    $cantidad = $columna[0]->cantidad;
-                    $cantidad++;
-
-                    $insercion2 = $conexionBBDD->insertarDatos("UPDATE carrito SET cantidad = '$cantidad' WHERE id_producto = '$id_producto' AND id_usuario = '$id_usuario'");
-                }
-                ?>
-                console.log("producto guardado correctamente");
-
+                fetch(`procesar-carrito.php?id_producto=${id_producto}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            console.log("guardado correctamente");
+                        } else {
+                            console.log("guardado fallido");
+                        }
+                    });
             }
-            /* fetch(`agregarProducto.php?id=${id}`)
-                .then(respuesta => {
-                    return respuesta.json();
-                })
-                .then(respuestaJSON => {
-                    if (respuestaJSON.ok) {
-                        alert("Bien");
-                    } else {
-                        alert("Mal");
-                    }
-                })
-            alert(1) */
 
         }
-        /* const boton = document.querySelector("#login");
-        boton.onclick = () => {
-            fetch("login.php")
-                .then(() => {
-                    window.location.reload();
-                })
+        let params = new URLSearchParams(window.location.search);
 
-        }
-        const boton2 = document.querySelector("#logout");
-        boton2.onclick = () => {
-            fetch("logout.php");
-        } */
-        meterAlCarrito(<?= $id_producto ?>, <?= $id_usuario ?>);
+        const id_producto = params.get('id');
+        const id_usuario = params.get('id_usuario');
+        meterAlCarrito(id_producto, id_usuario);
     </script>
 </head>
 
