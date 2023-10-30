@@ -15,7 +15,7 @@ $conexionBBDD = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
 </head>
 
 <body>
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         <a href="./admin.php">
             <button type="button">Volver</button>
         </a>
@@ -24,7 +24,6 @@ $conexionBBDD = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
         if (isset($_POST["guardar"])) {
             $tabla = $_POST['tabla'];
             $activa = $_POST['activa'];
-            echo "hasta aqui";
             if ($tabla == 'novedades' || $tabla == 'destacados' || $tabla == 'ofertas' || $activa == 1 || $activa == 0) {
                 $nombre = $_POST['nombre'];
                 $descripcion = $_POST['descripcion'];
@@ -48,7 +47,7 @@ $conexionBBDD = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
         echo "<td><input type='text' name='nombre'></td>";
         echo "<td><input type='text' name='descripcion'></td>";
         echo "<td><input type='number' name='precio'></td>";
-        echo "<td><input type='text' name='imagen'></td>";
+        echo "<td><input type='text' name='imagen'><input type='file'></td>";
         echo "<td><input type='number' name='activa'></td>";
         echo "<td><input type='text' name='descripcion_larga'></td>";
 

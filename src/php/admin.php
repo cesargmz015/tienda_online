@@ -30,6 +30,7 @@ if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1) {
             </div>
             <div class="div-form">
                 <form action="" method="get" class="form-usuarios" id="form-usuarios">
+                    <!-- Usuarios -->
                     <h2>Usuarios</h2>
                     <?php
                     $datos = $conexionBBDD->obtenerDatos("SELECT * FROM usuario");
