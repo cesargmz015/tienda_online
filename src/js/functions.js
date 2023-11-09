@@ -128,7 +128,7 @@ window.onload = () => {
     });
 
     btn_next_carrusel1.addEventListener('click', function() {
-        if (indiceActualCarrusel1 < 2) {
+        if (indiceActualCarrusel1 < galeria_carrusel1.length - 1) {
             indiceActualCarrusel1++;
             actualizarCarrusel1();
         }
@@ -142,7 +142,7 @@ window.onload = () => {
     });
 
     btn_next_carrusel2.addEventListener('click', function() {
-        if (indiceActualCarrusel2 < 2) {
+        if (indiceActualCarrusel2 < galeria_carrusel2.length - 1) {
             indiceActualCarrusel2++;
             actualizarCarrusel2();
         }
@@ -156,7 +156,7 @@ window.onload = () => {
     });
 
     btn_next_carrusel3.addEventListener('click', function() {
-        if (indiceActualCarrusel3 < 2) {
+        if (indiceActualCarrusel3 < galeria_carrusel3.length - 1) {
             indiceActualCarrusel3++;
             actualizarCarrusel3();
         }
@@ -178,7 +178,7 @@ window.onload = () => {
         }
 
         // Verificar si estamos en la última galería
-        if (indiceActualCarrusel1 === 2) {
+        if (indiceActualCarrusel1 === galeria_carrusel1.length - 1) {
             btn_next_carrusel1.style.opacity = '.7'; // Ocultar el botón Prev
             btn_next_carrusel1.style.pointerEvents = 'none';
         } else {
@@ -203,7 +203,7 @@ window.onload = () => {
         }
 
         // Verificar si estamos en la última galería
-        if (indiceActualCarrusel2 === 2) {
+        if (indiceActualCarrusel2 === galeria_carrusel2.length - 1) {
             btn_next_carrusel2.style.opacity = '.7'; // Ocultar el botón Prev
             btn_next_carrusel2.style.pointerEvents = 'none';
         } else {
@@ -227,7 +227,7 @@ window.onload = () => {
         }
 
         // Verificar si estamos en la última galería
-        if (indiceActualCarrusel3 === 2) {
+        if (indiceActualCarrusel3 === galeria_carrusel3.length - 1) {
             btn_next_carrusel3.style.opacity = '.7'; // Ocultar el botón Prev
             btn_next_carrusel3.style.pointerEvents = 'none';
         } else {

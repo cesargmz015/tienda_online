@@ -52,7 +52,9 @@ if (isset($_GET["id"])) {
             <?php
             if (isset($_SESSION["id"])) { ?>
                 <div class="botones_header">
-                    Bienvenido <?= $_SESSION["nombre"] ?>
+                    <label>
+                        Bienvenido <?= $_SESSION["nombre"] ?>
+                    </label>
                     <button type="button" onclick="window.location.href='./logout.php'"><span>Logout</span></button>
                     <?php if ($_SESSION["rol"] > 0) { ?>
                         <button type="button" onclick="window.location.href='./admin.php'"><span>Admin</span></button>
@@ -98,15 +100,7 @@ if (isset($_GET["id"])) {
                     <h2><?= $precio ?>€</h2>
                     <h3><?= $descripcion ?></h3>
                     <br>
-                    <select name="tallas" id="tallas" class="tallas">
-                        <option value="elegir-talla">Elige tu talla</option>
-                        <option value="XS">XS</option>
-                        <option value="S">S</option>
-                        <option value="M">M</option>
-                        <option value="L">L</option>
-                        <option value="XL">XL</option>
-                        <option value="XXL">XXL</option>
-                    </select>
+                    <input type="number" name="cantidad-carrito" id="cantidad-carrito">
                     <br>
                     <br>
                     <br>
