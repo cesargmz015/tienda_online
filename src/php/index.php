@@ -21,7 +21,7 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
 
 <body>
     <div class="h1">
-        <h1>TIENDA ONLINE</h1>
+        <h1 id="sección-novedades">TIENDA ONLINE</h1>
     </div class="h1">
     <header>
         <div class="div_header">
@@ -55,6 +55,7 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
                     <button type="button" id="boton-logout" onclick="window.location.href='./logout.php'"><span>Logout</span></button>
                     <?php if ($_SESSION["rol"] > 0) { ?>
                         <button type="button" id="boton-administrar" onclick="window.location.href='./admin.php'"><span>Admin</span></button>
+                        <button type="button" id="boton-vista"><span>Vista completa</span></button>
                     <?php } ?>
                 </div>
             <?php } else { ?>
@@ -64,6 +65,11 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
                 </div>
             <?php } ?>
         </div>
+        <nav class="nav-secciones">
+            <a href="#sección-novedades">Novedades</a>
+            <a href="#sección-destacados">Destacados</a>
+            <a href="#sección-ofertas">Ofertas</a>
+        </nav>
         <hr class="hr-header">
     </header>
     <main>
@@ -112,7 +118,7 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
             }
             ?>
         </div>
-        <div class="div-botones-galeria">
+        <div class="div-botones-galeria" id="sección-destacados">
             <button class="btn-prev-carrusel1"><span>previous</span></button>
             <button class="btn-next-carrusel1"><span>next</span></button>
         </div>
@@ -163,7 +169,7 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
             }
             ?>
         </div>
-        <div class="div-botones-galeria">
+        <div class="div-botones-galeria" id="sección-ofertas">
             <button class="btn-prev-carrusel2"><span>previous</span></button>
             <button class="btn-next-carrusel2"><span>next</span></button>
         </div>

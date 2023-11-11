@@ -20,6 +20,16 @@ if (isset($_GET["id"])) {
     <link rel="stylesheet" href="../styles/articulo.css">
     <script src="../js/functions.js" defer></script>
     <link rel="shortcut icon" href="../img/logo-tienda.ico" type="image/x-icon">
+    <script>
+        function agregarCantidadACarrito(id, id_usuario) {
+            let cantidad = document.getElementById('cantidad-carrito').value;
+            if (cantidad == "" || cantidad == 0) {
+                cantidad = 1;
+            }
+            window.location.href = `./carrito.php?id=${id}&id_usuario=${id_usuario}&cantidad=${cantidad}`;
+            console.log("cantidad correcta");
+        }
+    </script>
 </head>
 
 <body>
@@ -100,13 +110,11 @@ if (isset($_GET["id"])) {
                     <h2><?= $precio ?>€</h2>
                     <h3><?= $descripcion ?></h3>
                     <br>
-                    <input type="number" name="cantidad-carrito" id="cantidad-carrito">
+                    <input type="number" name="cantidad-carrito" id="cantidad-carrito" min="1" step="1" placeholder="cantidad" oninput="validity.valid||(value='');">
                     <br>
                     <br>
                     <br>
-                    <a href="">
-                        <button type="button" class="carrito">Añadir al carrito</button>
-                    </a>
+                    <button type="button" class="carrito" onclick="agregarCantidadACarrito(<?= $id ?>, <?= $id_usuario ?>)"><span>Añadir al carrito</span></button>
                 </div>
             </section>
             <section class="descripcion_larga">

@@ -28,7 +28,7 @@ window.onload = () => {
     /**funcion para hacer que los forms de login y sign up
      * se superpongan al resto del contenido
     */
-    
+
     const botonLogin = document.querySelector("#boton-login");
     const botonRegistro = document.querySelector("#boton-registro");
 

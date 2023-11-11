@@ -1,13 +1,13 @@
 window.onload = () => {
-    const meterAlCarrito = (id_producto, id_usuario) => {
+    const meterAlCarrito = (id_producto, id_usuario, cantidad_nueva) => {
         //COMPROBAMOS SI EL USUARIO EXISTE
-        if (id_usuario == null || typeof id_usuario === "undefined" || id_usuario == 0) {
+        if (id_usuario == null || id_usuario === "undefined" || id_usuario == 0) {
             //COMPRUEBO SI HAY CARRITO
             if (localStorage.getItem("carrito") == null) {
                 //SI NO HAY CARRITO CREO EL CARRITO Y AÑADO 1 DEL PRODUCTO
                 localStorage.setItem("carrito", JSON.stringify({
                     id_producto: id_producto,
-                    cantidad: 1
+                    cantidad: cantidad_nueva
                 }));
                 console.log("añadido correctamente");
             } else {
@@ -28,7 +28,7 @@ window.onload = () => {
                     if (producto.id_producto == id_producto) {
                         // SI EXISTE SUMO 1 Y CAMBIO LA VARIABLE DE CANTIDAD
                         existe = true;
-                        producto.cantidad += 1;
+                        producto.cantidad = cantidad_nueva;
                     }
                     // AÑADO EL TEXTO DEL PRODUCTO A LA VARIABLE
                     texto += JSON.stringify(producto) + "&";
@@ -38,7 +38,7 @@ window.onload = () => {
                     // AÑADO EL PRODUCTO AL FINAL DEL STRING
                     const productoNuevo = JSON.stringify({
                         id_producto: id_producto,
-                        cantidad: 1
+                        cantidad: cantidad_nueva
                     });
                     localStorage.setItem("carrito", localStorage.getItem("carrito") + "&" + productoNuevo);
                     console.log("añadido correctamente");
@@ -71,7 +71,7 @@ window.onload = () => {
                 });
             });
         } else {
-            fetch(`procesar-carrito.php?id_producto=${id_producto}`)
+            fetch(`procesar-carrito.php?id_producto=${id_producto}&cantidad=${cantidad_nueva}`)
                 .then(response => response.json())
                 .then(response => {
                     if (response) {
@@ -102,7 +102,8 @@ window.onload = () => {
     const imprimir_carrito = document.querySelector("#imprimir-carrito");
     const id_producto = params.get('id');
     const id_usuario = params.get('id_usuario');
-    meterAlCarrito(id_producto, id_usuario);
+    const cantidad_nueva = params.get('cantidad');
+    meterAlCarrito(id_producto, id_usuario, cantidad_nueva);
 
 }
 
