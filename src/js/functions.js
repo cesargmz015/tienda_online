@@ -1,8 +1,34 @@
 window.onload = () => {
+
+    /* codigo para que segun el numero de imagenes que haya en el section de cada galeria, cambie el width del section. si hay 4 imagenes, 1500px, si hay 3, 560px, y si hay 2, 840px */
+
+    const sections = document.querySelectorAll('.imagenes');
+
+    sections.forEach(section => {
+        // Obtiene el número de imágenes en cada sección
+        let numSudaderas = section.querySelectorAll('img').length;
+
+        // Establece el ancho de cada section dependiendo del número de imágenes
+        switch (numSudaderas) {
+            case 4:
+                section.style.width = '1500px';
+                break;
+            case 3:
+                section.style.width = '1180px';
+                break;
+            case 2:
+                section.style.width = '840px';
+                break;
+            case 1:
+                section.style.width = '480px';
+                break;
+        }
+    });
+
     /**funcion para hacer que los forms de login y sign up
      * se superpongan al resto del contenido
     */
-
+    
     const botonLogin = document.querySelector("#boton-login");
     const botonRegistro = document.querySelector("#boton-registro");
 

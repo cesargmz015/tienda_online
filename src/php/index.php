@@ -136,7 +136,7 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
                             $indiceAleatorio = rand(0, count($sudaderas) - 1);
                             $imagen = $sudaderas[$indiceAleatorio]->imagen;
                         ?>
-                            <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./novedades.php?id=<?= $id ?>&imgIndex=<?= urlencode($imagen) ?>'">
+                            <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./destacados.php?id=<?= $id ?>&imgIndex=<?= urlencode($imagen) ?>'">
                         <?php
                         }
                         ?>
@@ -187,7 +187,7 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
                             $indiceAleatorio = rand(0, count($sudaderas) - 1);
                             $imagen = $sudaderas[$indiceAleatorio]->imagen;
                         ?>
-                            <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./novedades.php?id=<?= $id ?>&imgIndex=<?= urlencode($imagen) ?>'">
+                            <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./ofertas.php?id=<?= $id ?>&imgIndex=<?= urlencode($imagen) ?>'">
                         <?php
                         }
                         ?>
