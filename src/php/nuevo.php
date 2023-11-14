@@ -34,7 +34,7 @@ $conexionBBDD = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
                 if (isset($_FILES['archivo_imagen']) && $_FILES['archivo_imagen']['error'] == 0) {
                     $file_tmp = $_FILES['archivo_imagen']['tmp_name'];
                     $file_name = $_FILES['archivo_imagen']['name'];
-                    move_uploaded_file($file_tmp, $_SERVER['DOCUMENT_ROOT'] . "/DAW_PHP_localhost/tienda_online/src/img/" . $file_name);
+                    move_uploaded_file($file_tmp, "../img/" . $file_name);
                     $imagen = "../img/" . $file_name;
                 } else {
                     // Si no se ha subido un archivo, usar la ruta proporcionada
@@ -52,12 +52,12 @@ $conexionBBDD = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
         echo "</tr>";
 
         echo "<tr>";
-        echo "<td><input type='text' name='tabla'></td>";
+        echo "<td><input type='text' name='tabla' placeholder='novedades, destacados u ofertas'></td>";
         echo "<td><input type='text' name='nombre'></td>";
         echo "<td><input type='text' name='descripcion'></td>";
         echo "<td><input type='number' name='precio'></td>";
         echo "<td><input type='text' name='imagen' placeholder='../img/nombreImagen.png'><input type='file' name='archivo_imagen' accept='image/*'></td>";
-        echo "<td><input type='number' name='activa'></td>";
+        echo "<td><input type='number' name='activa' min='0' max='1'></td>";
         echo "<td><input type='text' name='descripcion_larga'></td>";
 
         echo '<td><button type="submit" name="guardar">Guardar</button></td>';
@@ -66,7 +66,7 @@ $conexionBBDD = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
         echo "</table>";
 
         if (isset($_POST["guardar"])) {
-            if ($error_datos != '') {
+            if (isset($error_datos)) {
                 echo $error_datos;
             } else {
                 echo "cambios guardados correctamente";

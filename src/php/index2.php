@@ -1,16 +1,12 @@
 <?php
 session_start();
-require_once('./modelo.php');
-$origen = $_SERVER['HTTP_REFERER'];
-if (isset($_GET["id"])) {
-    $id = $_GET["id"];
-    $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
-    $datos = $sudadera->obtenerDatos("SELECT * FROM ofertas WHERE id = '$id'");
-    $sudaderas = $sudadera->convertirDatos($datos);
-} else {
-    echo "error";
-}
+require_once("./modelo.php");
+$sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
+//$datos = $sudadera->obtenerDatos("SELECT * FROM sudadera ORDER BY fecha LIMIT 4");
+// $datos = $sudadera->obtenerDatos("SELECT * FROM producto WHERE oferta = 1 LIMIT 4");
+// $sudaderas = $sudadera->convertirDatos($datos);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,29 +14,19 @@ if (isset($_GET["id"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda</title>
-    <link rel="stylesheet" href="../styles/articulo.css">
+    <link rel="stylesheet" href="../styles/index2.css">
     <script src="../js/functions.js" defer></script>
     <link rel="shortcut icon" href="../img/logo-tienda.ico" type="image/x-icon">
-    <script>
-        function agregarCantidadACarrito(id, id_usuario) {
-            let cantidad = document.getElementById('cantidad-carrito').value;
-            if (cantidad == "" || cantidad == 0) {
-                cantidad = 1;
-            }
-            window.location.href = `./carrito.php?id=${id}&id_usuario=${id_usuario}&cantidad=${cantidad}`;
-            console.log("cantidad correcta");
-        }
-    </script>
 </head>
 
 <body>
     <div class="h1">
-        <h1>TIENDA ONLINE</h1>
+        <h1 id="sección-novedades">TIENDA ONLINE</h1>
     </div class="h1">
     <header>
         <div class="div_header">
             <div>
-                <a href="<?= $origen ?>">
+                <a href="./index2.php">
                     <img src="../img/logo-tienda.png" alt="logo_tienda" id="logo_tienda">
                 </a href="./index.html">
             </div>
@@ -61,68 +47,70 @@ if (isset($_GET["id"])) {
                 </span>
             </div>
             <?php
-            if (isset($_SESSION["id"])) { ?>
-                <div class="botones_header">
+            $vista = "<button type='button' id='boton-vista' onclick='window.location.href=\"./index.php\"'><span>Vista secciones</span></button>";
+            ?>
+            <div class="botones_header">
+                <?php if (isset($_SESSION["id"])) { ?>
                     <label>
                         Bienvenido <?= $_SESSION["nombre"] ?>
                     </label>
-                    <button type="button" onclick="window.location.href='./logout.php'"><span>Logout</span></button>
+                    <button type="button" id="boton-logout" onclick="window.location.href='./logout.php'"><span>Logout</span></button>
                     <?php if ($_SESSION["rol"] > 0) { ?>
-                        <button type="button" onclick="window.location.href='./admin.php'"><span>Admin</span></button>
+                        <button type="button" id="boton-administrar" onclick="window.location.href='./admin.php'"><span>Admin</span></button>
                     <?php } ?>
-                </div>
-            <?php } else { ?>
-                <div class="botones_header">
+                <?php } else { ?>
                     <button type="button" id="boton-login"><span>Login</span></button>
                     <button type="button" id="boton-registro"><span>Sign up</span></button>
-                </div>
-            <?php } ?>
+                <?php } ?>
+                <?php echo $vista ?>
+            </div>
         </div>
         <hr class="hr-header">
     </header>
     <main>
-        <h2 class="seccion-articulo">de ofertas</h2>
-        <article>
-            <section class="main-container">
-                <?php
-                if (count($sudaderas)) {
-                    $titulo = $sudaderas[0]->nombre;
-                    $precio = $sudaderas[0]->precio;
-                    $descripcion = $sudaderas[0]->descripcion;
-                    $descripcion_larga = $sudaderas[0]->descripcion_larga;
-                } else {
-                    echo "no se encuentra el producto";
-                }
-                /* esto es para recuperar y mostrar el indice de la imagen que se ha mostrado
-                aleatoriamente en la pagina principal index.php que se ha recuperado de ella */
+        <div class="carrusel">
+            <?php
+            $datos = $sudadera->obtenerDatos("SELECT * FROM novedades UNION ALL SELECT * FROM destacados UNION ALL SELECT * FROM ofertas");
+            $sudaderas = $sudadera->convertirDatos($datos);
+            $numGalerias = ceil(count($sudaderas) / 4);
 
-                if (isset($_GET['imgIndex'])) {
-                    $imagen = urldecode($_GET['imgIndex']);
-                } else {
-                    echo "error en la imagen";
-                }
-                ?>
-                <div class="imagen">
-                    <img src="<?= $imagen ?>" alt="imagen">
+            for ($g = 0; $g < $numGalerias; $g++) {
+            ?>
+                <div class="galeria-carrusel1">
+                    <section class="imagenes">
+                        <?php
+                        for ($i = $g * 4; $i < min(($g + 1) * 4, count($sudaderas)); $i++) {
+                            $id = $sudaderas[$i]->id;
+                            $indiceAleatorio = rand(0, count($sudaderas) - 1);
+                            $imagen = $sudaderas[$indiceAleatorio]->imagen;
+                        ?>
+                            <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./novedades.php?id=<?= $id ?>&imgIndex=<?= urlencode($imagen) ?>'">
+                        <?php
+                        }
+                        ?>
+                    </section>
+                    <section class="detalles">
+                        <?php
+                        for ($i = $g * 4; $i < min(($g + 1) * 4, count($sudaderas)); $i++) {
+                            $titulo = $sudaderas[$i]->nombre;
+                            $precio = $sudaderas[$i]->precio;
+                            $descripcion = $sudaderas[$i]->descripcion;
+                        ?>
+                            <div class="div-detalles">
+                                <h2><?= $titulo ?></h2>
+                                <h2><?= $precio ?>€</h2>
+                                <h3><?= $descripcion ?></h3>
+                            </div>
+                        <?php
+                        }
+                        ?>
+                    </section>
                 </div>
-
-                <div class="detalles">
-                    <h2><?= $titulo ?></h2>
-                    <h2><?= $precio ?>€</h2>
-                    <h3><?= $descripcion ?></h3>
-                    <br>
-                    <input type="number" name="cantidad-carrito" id="cantidad-carrito" min="1" step="1" placeholder="cantidad" oninput="validity.valid||(value='');">
-                    <br>
-                    <br>
-                    <br>
-                    <button type="button" class="carrito" onclick="agregarCantidadACarrito(<?= $id ?>, <?= $id_usuario ?>)"><span>Añadir al carrito</span></button>
-                </div>
-            </section>
-            <section class="descripcion_larga">
-                <p><?= $descripcion_larga ?>
-                </p>
-            </section>
-        </article>
+            <?php
+            }
+            ?>
+        </div>
+        </div>
     </main>
     <br>
     <footer>

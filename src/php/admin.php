@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once('./modelo.php');
+$origen = $_SERVER['HTTP_REFERER'];
 if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1) {
     $conexionBBDD = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
 ?>
@@ -19,7 +20,7 @@ if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1) {
     <body>
         <div class="div-container">
             <div class="div-botones">
-                <a href="../php/index.php">
+                <a href="<?= $origen ?>">
                     <button type="button">Home</button>
                 </a>
                 <button type="button" id="boton-usuarios"><span>Usuarios</span></button>

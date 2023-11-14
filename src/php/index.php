@@ -47,23 +47,24 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
                 </span>
             </div>
             <?php
-            if (isset($_SESSION["id"])) { ?>
-                <div class="botones_header">
+            $vista = "<button type='button' id='boton-vista' onclick='window.location.href=\"./index2.php\"'><span>Vista completa</span></button>";
+            ?>
+            <div class="botones_header">
+                <?php if (isset($_SESSION["id"])) { ?>
                     <label>
                         Bienvenido <?= $_SESSION["nombre"] ?>
                     </label>
                     <button type="button" id="boton-logout" onclick="window.location.href='./logout.php'"><span>Logout</span></button>
                     <?php if ($_SESSION["rol"] > 0) { ?>
                         <button type="button" id="boton-administrar" onclick="window.location.href='./admin.php'"><span>Admin</span></button>
-                        <button type="button" id="boton-vista"><span>Vista completa</span></button>
                     <?php } ?>
-                </div>
-            <?php } else { ?>
-                <div class="botones_header">
+                <?php } else { ?>
                     <button type="button" id="boton-login"><span>Login</span></button>
                     <button type="button" id="boton-registro"><span>Sign up</span></button>
-                </div>
-            <?php } ?>
+                <?php } ?>
+                <?php echo $vista ?>
+                <br>
+            </div>
         </div>
         <nav class="nav-secciones">
             <a href="#sección-novedades">Novedades</a>

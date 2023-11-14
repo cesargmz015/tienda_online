@@ -48,7 +48,7 @@ if ($email_valido == true && $password_valido == true) {
         $_SESSION["id"] = $usuario[0]->id;
         $_SESSION["nombre"] = $usuario[0]->nombre;
         $_SESSION["rol"] = $usuario[0]->rol;
-        header('Location: ./index.php');
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
         exit; // Es importante llamar a exit después de header para asegurarte de que no se ejecute más código después de la redirección.
     }
 }

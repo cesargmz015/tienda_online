@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once('./modelo.php');
+$origen = $_SERVER['HTTP_REFERER'];
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
     $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
@@ -39,7 +40,7 @@ if (isset($_GET["id"])) {
     <header>
         <div class="div_header">
             <div>
-                <a href="./index.php">
+                <a href="<?= $origen ?>">
                     <img src="../img/logo-tienda.png" alt="logo_tienda" id="logo_tienda">
                 </a href="./index.html">
             </div>

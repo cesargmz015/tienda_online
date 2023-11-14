@@ -17,7 +17,7 @@ window.onload = () => {
                 section.style.width = '1180px';
                 break;
             case 2:
-                section.style.width = '840px';
+                section.style.width = '830px';
                 break;
             case 1:
                 section.style.width = '480px';

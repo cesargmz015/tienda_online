@@ -1,0 +1,420 @@
+html,
+body {
+    /* height 100% para mantener el header pegado arriba y el footer pegado abajo si no hay mas contenido en la pagina */
+    /*este height:100% tambien influye en el comportamiento position:sticky*/
+    /* height: 100%; */
+    background-color: antiquewhite;
+    scroll-behavior: smooth;
+}
+
+body {
+    /*esto tambien en conjunto para lo mismo que heigh 100%*/
+    margin: 0;
+    grid-template-columns: min-content auto min-content;
+}
+
+.hr-header {
+    transition: margin-top 0.2s ease;
+}
+
+.hr-header,
+.hr-footer {
+    margin: 50px 5%;
+    border: none;
+    height: 2px;
+    background-color: black;
+}
+
+h1 {
+    text-align: center;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: antiquewhite;
+}
+
+.div_header {
+    display: grid;
+    grid-template-columns: 33.33% 33.33% 33.33%;
+    align-items: center;
+    text-align: center;
+}
+
+#logo_tienda {
+    width: 15%;
+}
+
+.input-container-search {
+    position: relative;
+}
+
+.icon {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: calc(50% + 5px);
+    transform: translateY(calc(-50% - 5px));
+}
+
+.input-search {
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    transition: .2s linear;
+    border: 2.5px solid black;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.input-search:focus {
+    outline: none;
+    border: 0.5px solid black;
+    box-shadow: -5px -5px 0px black;
+}
+
+.input-container-search:hover > .icon {
+    animation: anim 1s linear infinite;
+}
+
+@keyframes anim {
+
+    0%,
+    100% {
+        transform: translateY(calc(-50% - 5px)) scale(1);
+    }
+
+    50% {
+        transform: translateY(calc(-50% - 5px)) scale(1.1);
+    }
+}
+
+.botones_header > :first-child {
+    margin-right: 10px;
+}
+
+button {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: rgb(80, 22, 22);
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 17px;
+    padding: 16px;
+    width: 130px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+}
+
+button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+button span:after {
+    content: '»';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -15px;
+    transition: 0.5s;
+}
+
+button:hover span {
+    padding-right: 15px;
+}
+
+button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+h2 {
+    text-align: center;
+}
+
+.nav-secciones {
+    display: grid;
+    grid-template-columns: 33.33% 33.33% 33.33%;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-right: 27.5%;
+    margin-left: 27.5%;
+    font-size: x-large;
+}
+
+.nav-secciones a {
+    transition: text-shadow 0.2s ease;
+    text-shadow: 0px 0px 0px transparent;
+}
+
+.nav-secciones a:hover {
+    text-shadow: 0px 0px 2px black;
+}
+
+.hr-main {
+    margin: 50px 25%;
+    border: none;
+    height: 1px;
+    background-color: black;
+}
+
+.galeria {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    gap: 20px;
+}
+
+.galeria-carrusel1 {
+    display: grid;
+    place-content: center;
+    flex: 0 0 100%;
+    transition: .5s ease;
+}
+
+.imagenes {
+    display: flex;
+    max-width: 100%;
+    height: 430px;
+}
+
+section img,
+.div-detalles {
+    width: 0px;
+    flex-grow: 1;
+    object-fit: cover;
+    opacity: .9;
+    transition: .5s ease;
+}
+
+.imagenes img:hover {
+    cursor: pointer;
+    width: 130px;
+    opacity: 1;
+}
+
+.detalles {
+    height: 0;
+    display: flex;
+    transition: height .3s ease;
+    /* Transición suave para la altura */
+    overflow: hidden;
+    /* Asegurarse de que el contenido no se muestre cuando height sea 0 */
+}
+
+.div-detalles {
+    opacity: 0;
+    /* opacity en lugar de visibility */
+    width: 0;
+    text-align: center;
+    /* transition: opacity .3s ease; */
+    /* transition: width .3s ease; */
+    /* Transición suave para la opacidad */
+    pointer-events: none;
+    /* Asegurarse de que los elementos con opacidad 0 no puedan recibir eventos de clic */
+}
+
+.div-detalles.visible {
+    opacity: 1;
+    pointer-events: auto;
+    /* Restaurar la capacidad de recibir eventos de clic cuando esté visible */
+}
+
+h2,
+h3 {
+    font-weight: bold;
+}
+
+h4 {
+    text-align: center;
+    font-size: x-large;
+}
+
+.div-botones-galeria {
+    text-align: center;
+}
+
+.div-botones-galeria > :first-child {
+    margin-right: 10px;
+}
+
+.btn-prev-carrusel1,
+.btn-next-carrusel1,
+.btn-prev-carrusel2,
+.btn-next-carrusel2,
+.btn-prev-carrusel3,
+.btn-next-carrusel3 {
+    width: 70px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: xx-small;
+}
+
+.btn-prev-carrusel1 span::before,
+.btn-prev-carrusel2 span::before,
+.btn-prev-carrusel3 span::before {
+    content: '«';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: -9px;
+    transition: 0.5s;
+}
+
+.btn-prev-carrusel1 span::after,
+.btn-prev-carrusel2 span::after,
+.btn-prev-carrusel3 span::after {
+    content: '';
+}
+
+.btn-prev-carrusel1:hover span,
+.btn-prev-carrusel2:hover span,
+.btn-prev-carrusel3:hover span {
+    padding-left: 9px;
+}
+
+.btn-prev-carrusel1:hover span::before,
+.btn-prev-carrusel2:hover span::before,
+.btn-prev-carrusel3:hover span::before {
+    opacity: 1;
+    left: 0;
+}
+
+.div_footer {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    text-align: center;
+}
+
+.div_enlaces_footer {
+    display: grid;
+    place-content: center;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.icons_social_media {
+    width: 4%;
+}
+
+#login,
+#registro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.fondo {
+    background-color: rgba(0, 0, 0, 0.381);
+    width: 100%;
+    height: 100%;
+}
+
+.modal {
+    animation: modal 0.75s;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.oculto {
+    display: none;
+}
+
+@keyframes modal {
+    from {
+        opacity: 0;
+        /* si pones el primero y el segundo en porcentaje y negativo
+        caen los dos hacia abajo */
+        transform: translate(-50%, -200px);
+    }
+
+    to {
+        opacity: 1;
+        /* esto es para rotar */
+        /* transform: translate(-50%, -50%); */
+    }
+}
+
+.form {
+    background-color: #fff;
+    display: block;
+    padding: 1rem;
+    max-width: 350px;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.form-title {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    text-align: center;
+    color: #000;
+}
+
+.input-container {
+    position: relative;
+}
+
+.input-container input,
+.form button {
+    outline: none;
+    border: 1px solid #e5e7eb;
+    margin: 8px 0;
+}
+
+.input-container input {
+    background-color: #fff;
+    padding: 0;
+    height: 40px;
+    padding-right: 3rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    width: 300px;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.submit {
+    display: block;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    background-color: rgb(80, 22, 22);
+    color: #ffffff;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    width: 100%;
+    border-radius: 0.5rem;
+    text-transform: uppercase;
+}
+
+.terminos {
+    text-align: center;
+}
+
+.terminos label {
+    padding-left: 10px;
+}
+
+.copy {
+    display: grid;
+    place-content: center;
+}
