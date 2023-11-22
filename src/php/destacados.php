@@ -1,9 +1,9 @@
 <?php
 session_start();
 require_once('./modelo.php');
-$origen = $_SERVER['HTTP_REFERER'];
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
+    $id_usuario = isset($_SESSION["id"]) ? $_SESSION["id"] : 0;
     $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
     $datos = $sudadera->obtenerDatos("SELECT * FROM destacados WHERE id = '$id'");
     $sudaderas = $sudadera->convertirDatos($datos);
@@ -22,13 +22,48 @@ if (isset($_GET["id"])) {
     <script src="../js/functions.js" defer></script>
     <link rel="shortcut icon" href="../img/logo-tienda.ico" type="image/x-icon">
     <script>
-        function agregarCantidadACarrito(id, id_usuario) {
+        const agregarCantidadACarrito = (id, id_usuario, tabla) => {
             let cantidad = document.getElementById('cantidad-carrito').value;
             if (cantidad == "" || cantidad == 0) {
                 cantidad = 1;
             }
-            window.location.href = `./carrito.php?id=${id}&id_usuario=${id_usuario}&cantidad=${cantidad}`;
+            console.log(tabla);
+            window.location.href = `./carrito.php?id=${id}&id_usuario=${id_usuario}&cantidad=${cantidad}&tabla=${tabla}`;
             console.log("cantidad correcta");
+        }
+        const validarFormularioLogin = () => {
+            const email = document.forms["formLogin"]["email"].value;
+            const password = document.forms["formLogin"]["password"].value;
+
+            if (email == "" || password == "") {
+                alert("Todos los campos deben ser llenados");
+                return false;
+            }
+
+            return true;
+        }
+
+        const validarFormularioRegistro = () => {
+            const nombre = document.forms["formRegistro"]["nombre"].value;
+            const apellidos = document.forms["formRegistro"]["apellidos"].value;
+            const dni = document.forms["formRegistro"]["dni"].value;
+            const direccion = document.forms["formRegistro"]["direccion"].value;
+            const telefono = document.forms["formRegistro"]["telefono"].value;
+            const email = document.forms["formRegistro"]["email"].value;
+            const password = document.forms["formRegistro"]["password"].value;
+            const terminos = document.forms["formRegistro"]["terminos"].checked;
+
+            if (nombre == "" || apellidos == "" || dni == "" || direccion == "" || telefono == "" || email == "" || password == "") {
+                alert("Todos los campos deben ser llenados");
+                return false;
+            }
+
+            if (!terminos) {
+                alert("Debe aceptar los términos y condiciones");
+                return false;
+            }
+
+            return true;
         }
     </script>
 </head>
@@ -40,9 +75,9 @@ if (isset($_GET["id"])) {
     <header>
         <div class="div_header">
             <div>
-                <a href="<?= $origen ?>">
+                <a href="./index.php">
                     <img src="../img/logo-tienda.png" alt="logo_tienda" id="logo_tienda">
-                </a href="./index.html">
+                </a>
             </div>
             <div class="input-container-search">
                 <input type="search" name="text" class="input-search" placeholder="buscar...">
@@ -111,11 +146,11 @@ if (isset($_GET["id"])) {
                     <h2><?= $precio ?>€</h2>
                     <h3><?= $descripcion ?></h3>
                     <br>
-                    <input type="number" name="cantidad-carrito" id="cantidad-carrito" min="1" step="1" placeholder="cantidad" oninput="validity.valid||(value='');">
+                    <input type="number" name="cantidad-carrito" id="cantidad-carrito" min="1" placeholder="cantidad" oninput="validity.valid||(value='');">
                     <br>
                     <br>
                     <br>
-                    <button type="button" class="carrito" onclick="agregarCantidadACarrito(<?= $id ?>, <?= $id_usuario ?>)"><span>Añadir al carrito</span></button>
+                    <button type="button" class="carrito" onclick="agregarCantidadACarrito(<?= $id ?>, <?= $id_usuario ?>, 'destacados')"><span>Añadir al carrito</span></button>
                 </div>
             </section>
             <section class="descripcion_larga">
@@ -163,7 +198,7 @@ if (isset($_GET["id"])) {
     </footer>
     <div id="login" class="oculto">
         <div class="modal">
-            <form class="form" action="../php/login.php" method="get">
+            <form class="form" action="../php/login.php" method="get" name="formLogin" onsubmit="return validarFormularioLogin()">
                 <p class="form-title">Login</p>
                 <div class="input-container">
                     <input id="email-login" type="email" name="email" placeholder="Enter email">
@@ -180,7 +215,7 @@ if (isset($_GET["id"])) {
     </div>
     <div id="registro" class="oculto">
         <div class="modal">
-            <form class="form" action="../php/signup.php" method="get">
+            <form class="form" action="../php/signup.php" method="get" name="formRegistro" onsubmit="return validarFormularioRegistro()">
                 <p class="form-title">Sign up</p>
                 <div class="input-container">
                     <input id="nombre" type="text" name="nombre" placeholder=" Enter name">

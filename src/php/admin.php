@@ -1,7 +1,6 @@
 <?php
 session_start();
 require_once('./modelo.php');
-$origen = $_SERVER['HTTP_REFERER'];
 if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1) {
     $conexionBBDD = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
 ?>
@@ -20,7 +19,7 @@ if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1) {
     <body>
         <div class="div-container">
             <div class="div-botones">
-                <a href="<?= $origen ?>">
+                <a href="./index.php">
                     <button type="button">Home</button>
                 </a>
                 <button type="button" id="boton-usuarios"><span>Usuarios</span></button>
@@ -78,7 +77,12 @@ if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1) {
                     ?>
                 </form>
                 <form action="" method="get" class="form-sudaderas" id="form-sudaderas">
-                    <h2>Seccion novedades</h2>
+                    <div class="indice">
+                        <a href="#seccion-novedades">Novedades</a>
+                        <a href="#seccion-destacados">Destacados</a>
+                        <a href="#seccion-ofertas">Ofertas</a>
+                    </div>
+                    <h2 id="seccion-novedades">Seccion novedades</h2>
                     <?php
                     $datos = $conexionBBDD->obtenerDatos("SELECT * FROM novedades");
                     $sudaderas = $conexionBBDD->convertirDatos($datos);
@@ -114,7 +118,7 @@ if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1) {
                     }
                     echo "</table>";
                     ?>
-                    <h2>Seccion destacados</h2>
+                    <h2 id="seccion-destacados">Seccion destacados</h2>
                     <?php
                     $datos = $conexionBBDD->obtenerDatos("SELECT * FROM destacados");
                     $sudaderas = $conexionBBDD->convertirDatos($datos);
@@ -149,7 +153,7 @@ if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1) {
                     }
                     echo "</table>";
                     ?>
-                    <h2>Seccion ofertas</h2>
+                    <h2 id="seccion-ofertas">Seccion ofertas</h2>
                     <?php
                     $datos = $conexionBBDD->obtenerDatos("SELECT * FROM ofertas");
                     $sudaderas = $conexionBBDD->convertirDatos($datos);

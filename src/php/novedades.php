@@ -1,10 +1,9 @@
 <?php
 session_start();
 require_once('./modelo.php');
-$origen = $_SERVER['HTTP_REFERER'];
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
-    $id_usuario = isset($_SESSION["id"]);
+    $id_usuario = isset($_SESSION["id"]) ? $_SESSION["id"] : 0;
     $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
     $datos = $sudadera->obtenerDatos("SELECT * FROM novedades WHERE id = '$id'");
     $sudaderas = $sudadera->convertirDatos($datos);
@@ -23,13 +22,62 @@ if (isset($_GET["id"])) {
     <script src="../js/functions.js" defer></script>
     <link rel="shortcut icon" href="../img/logo-tienda.ico" type="image/x-icon">
     <script>
-        function agregarCantidadACarrito(id, id_usuario) {
+        const agregarCantidadACarrito = (id, id_usuario, tabla) => {
             let cantidad = document.getElementById('cantidad-carrito').value;
             if (cantidad == "" || cantidad == 0) {
                 cantidad = 1;
             }
-            window.location.href = `./carrito.php?id=${id}&id_usuario=${id_usuario}&cantidad=${cantidad}`;
+            console.log(tabla);
+            window.location.href = `./carrito.php?id=${id}&id_usuario=${id_usuario}&cantidad=${cantidad}&tabla=${tabla}`;
             console.log("cantidad correcta");
+        }
+        const validarFormularioLogin = () => {
+            const email = document.forms["formLogin"]["email"].value;
+            const password = document.forms["formLogin"]["password"].value;
+
+            if (email == "" || password == "") {
+                alert("Todos los campos deben ser llenados");
+                return false;
+            }
+
+            return true;
+        }
+
+        const validarFormularioRegistro = () => {
+            const nombre = document.forms["formRegistro"]["nombre"].value;
+            const apellidos = document.forms["formRegistro"]["apellidos"].value;
+            const dni = document.forms["formRegistro"]["dni"].value;
+            const direccion = document.forms["formRegistro"]["direccion"].value;
+            const telefono = document.forms["formRegistro"]["telefono"].value;
+            const email = document.forms["formRegistro"]["email"].value;
+            const password = document.forms["formRegistro"]["password"].value;
+            const terminos = document.forms["formRegistro"]["terminos"].checked;
+
+            if (nombre == "" || apellidos == "" || dni == "" || direccion == "" || telefono == "" || email == "" || password == "") {
+                alert("Todos los campos deben ser llenados");
+                return false;
+            }
+            if (!terminos) {
+                alert("Debe aceptar los términos y condiciones");
+                return false;
+            }
+
+            return true;
+        }
+        const agregarComentario = (id, id_usuario, tabla) => {
+            const comentario = document.getElementById('comentario').value;
+            if (comentario.trim() === '') {
+                alert('El comentario no puede estar vacío');
+                return false;
+            }
+
+            if (id_usuario == 0) {
+                alert('Debes iniciar sesión para poder comentar');
+                return false;
+            }
+
+            alert('Comentario añadido correctamente');
+            return true;
         }
     </script>
 </head>
@@ -41,9 +89,9 @@ if (isset($_GET["id"])) {
     <header>
         <div class="div_header">
             <div>
-                <a href="<?= $origen ?>">
+                <a href="./index.php">
                     <img src="../img/logo-tienda.png" alt="logo_tienda" id="logo_tienda">
-                </a href="./index.html">
+                </a>
             </div>
             <div class="input-container-search">
                 <input type="search" name="text" class="input-search" placeholder="buscar...">
@@ -112,16 +160,43 @@ if (isset($_GET["id"])) {
                     <h2><?= $precio ?>€</h2>
                     <h3><?= $descripcion ?></h3>
                     <br>
-                    <input type="number" name="cantidad-carrito" id="cantidad-carrito" min="1" step="1" placeholder="cantidad" oninput="validity.valid||(value='');">
+                    <input type="number" name="cantidad-carrito" id="cantidad-carrito" min="1" placeholder="cantidad" oninput="validity.valid||(value='');">
                     <br>
                     <br>
                     <br>
-                    <button type="button" class="carrito" onclick="agregarCantidadACarrito(<?= $id ?>, <?= $id_usuario ?>)"><span>Añadir al carrito</span></button>
+                    <button type="button" class="carrito" onclick="agregarCantidadACarrito(<?= $id ?>, <?= $id_usuario ?>, 'novedades')"><span>Añadir al carrito</span></button>
                 </div>
             </section>
             <section class="descripcion_larga">
                 <p><?= $descripcion_larga ?>
                 </p>
+            </section>
+            <hr class="hr-main">
+            <section class="seccion-comentarios">
+                <form action="" method="post" onsubmit="return agregarComentario(<?= $id ?>, <?= $id_usuario ?>, 'novedades')">
+                    <?php
+                    if (isset($_POST["boton-comentario"])) {
+                        $texto = $_POST["comentario"];
+                        $sudadera->insertarDatos("INSERT INTO comentarios (id_producto, id_usuario, nombre_usuario, comentario, tabla) VALUES ('$id', '$id_usuario', '{$_SESSION["nombre"]}', '$texto', 'novedades')");
+                    }
+
+                    $comentario = $sudadera->obtenerDatos("SELECT nombre_usuario, comentario FROM comentarios WHERE id_producto = '$id' AND tabla = 'novedades'");
+                    $comentarios = $sudadera->convertirDatos($comentario);
+                    echo "<textarea name='comentario' id='comentario' placeholder='Escribe tu comentario'></textarea><button type='submit' name='boton-comentario' class='boton-comentarios'><span>Añadir comentario</span></button>";
+                    if ($comentario->num_rows <= 0) {
+                        echo "<p>Aún no hay comentarios para este producto</p>";
+                    } else {
+                        echo "<h2 class='titulo-comentario'>Comentarios</h2>";
+                        for ($i = 0; $i < count($comentarios); $i++) {
+                            $nombre_usuario = $comentarios[$i]->nombre_usuario;
+                            $comentario_tabla = $comentarios[$i]->comentario;
+                            echo "<hr class='hr-main'>";
+                            echo "<h3>$nombre_usuario:</h3>";
+                            echo "<p>$comentario_tabla</p>";
+                        }
+                    }
+                    ?>
+                </form>
             </section>
         </article>
     </main>
@@ -164,7 +239,7 @@ if (isset($_GET["id"])) {
     </footer>
     <div id="login" class="oculto">
         <div class="modal">
-            <form class="form" action="../php/login.php" method="get">
+            <form class="form" action="../php/login.php" method="get" name="formLogin" onsubmit="return validarFormularioLogin()">
                 <p class="form-title">Login</p>
                 <div class="input-container">
                     <input id="email-login" type="email" name="email" placeholder="Enter email">
@@ -181,7 +256,7 @@ if (isset($_GET["id"])) {
     </div>
     <div id="registro" class="oculto">
         <div class="modal">
-            <form class="form" action="../php/signup.php" method="get">
+            <form class="form" action="../php/signup.php" method="get" name="formRegistro" onsubmit="return validarFormularioRegistro()">
                 <p class="form-title">Sign up</p>
                 <div class="input-container">
                     <input id="nombre" type="text" name="nombre" placeholder=" Enter name">

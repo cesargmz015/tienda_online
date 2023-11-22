@@ -17,6 +17,42 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
     <link rel="stylesheet" href="../styles/index.css">
     <script src="../js/functions.js" defer></script>
     <link rel="shortcut icon" href="../img/logo-tienda.ico" type="image/x-icon">
+    <script>
+        const validarFormularioLogin = () => {
+            const email = document.forms["formLogin"]["email"].value;
+            const password = document.forms["formLogin"]["password"].value;
+
+            if (email == "" || password == "") {
+                alert("Todos los campos deben ser llenados");
+                return false;
+            }
+
+            return true;
+        }
+
+        const validarFormularioRegistro = () => {
+            const nombre = document.forms["formRegistro"]["nombre"].value;
+            const apellidos = document.forms["formRegistro"]["apellidos"].value;
+            const dni = document.forms["formRegistro"]["dni"].value;
+            const direccion = document.forms["formRegistro"]["direccion"].value;
+            const telefono = document.forms["formRegistro"]["telefono"].value;
+            const email = document.forms["formRegistro"]["email"].value;
+            const password = document.forms["formRegistro"]["password"].value;
+            const terminos = document.forms["formRegistro"]["terminos"].checked;
+
+            if (nombre == "" || apellidos == "" || dni == "" || direccion == "" || telefono == "" || email == "" || password == "") {
+                alert("Todos los campos deben ser llenados");
+                return false;
+            }
+
+            if (!terminos) {
+                alert("Debe aceptar los términos y condiciones");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
 </head>
 
 <body>
@@ -265,7 +301,7 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
     </footer>
     <div id="login" class="oculto">
         <div class="modal">
-            <form class="form" action="../php/login.php" method="get">
+            <form class="form" action="../php/login.php" method="get" name="formLogin" onsubmit="return validarFormularioLogin()">
                 <p class="form-title">Login</p>
                 <div class="input-container">
                     <input id="email-login" type="email" name="email" placeholder="Enter email">
@@ -282,7 +318,7 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
     </div>
     <div id="registro" class="oculto">
         <div class="modal">
-            <form class="form" action="../php/signup.php" method="get">
+            <form class="form" action="../php/signup.php" method="get" name="formRegistro" onsubmit="return validarFormularioRegistro()">
                 <p class="form-title">Sign up</p>
                 <div class="input-container">
                     <input id="nombre" type="text" name="nombre" placeholder=" Enter name">

@@ -14,10 +14,79 @@ $tabla = $_GET["table"];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../styles/editar.css">
+    <script>
+        const validarFormularioUsuario = () => {
+            const nombre = document.forms["form"]["nombre"].value;
+            const apellidos = document.forms["form"]["apellidos"].value;
+            const direccion = document.forms["form"]["direccion"].value;
+            const telefono = document.forms["form"]["telefono"].value;
+            const correo = document.forms["form"]["correo"].value;
+            const contraseña = document.forms["form"]["contraseña"].value;
+            const dni = document.forms["form"]["dni"].value;
+            const rol = document.forms["form"]["rol"].value;
+
+            if (nombre == "" || apellidos == "" || direccion == "" || telefono == "" || correo == "" || contraseña == "" || dni == "" || rol == "") {
+                alert("Todos los campos deben ser llenados");
+                return false;
+            }
+
+            if (isNaN(telefono)) {
+                alert("El teléfono debe ser un número");
+                return false;
+            }
+
+            if (rol != "0" && rol != "1") {
+                alert("Rol debe ser 0 o 1");
+                return false;
+            }
+
+            return true;
+        }
+
+        const validarFormularioArticulos = () => {
+            const nombre = document.forms["form"]["nombre"].value;
+            const descripcion = document.forms["form"]["descripcion"].value;
+            const precio = document.forms["form"]["precio"].value;
+            const imagen = document.forms["form"]["imagen"].value;
+            const activa = document.forms["form"]["activa"].value;
+            const descripcion_larga = document.forms["form"]["descripcion_larga"].value;
+
+            if (nombre == "" || descripcion == "" || precio == "" || imagen == "" || activa == "" || descripcion_larga == "") {
+                alert("Todos los campos deben ser llenados");
+                return false;
+            }
+
+            if (isNaN(precio)) {
+                alert("El precio debe ser un número");
+                return false;
+            }
+
+            if (activa != "0" && activa != "1") {
+                alert("Activa debe ser 0 o 1");
+                return false;
+            }
+
+            return true;
+        }
+
+        const validarFormulario = () => {
+            const tabla = "<?php echo $tabla; ?>";
+            switch (tabla) {
+                case 'usuario':
+                    return validarFormularioUsuario();
+                case 'novedades':
+                    return validarFormularioArticulos();
+                case 'destacados':
+                    return validarFormularioArticulos();
+                case 'ofertas':
+                    return validarFormularioArticulos();
+            }
+        }
+    </script>
 </head>
 
 <body>
-    <form action="" method="post">
+    <form action="" method="post" name="form" onsubmit="return validarFormulario()">
         <a href="./admin.php">
             <button type="button">Volver</button>
         </a>
@@ -64,11 +133,11 @@ $tabla = $_GET["table"];
                 echo "<td><input type='text' name='apellidos' value='$apellidos'></td>";
                 echo "<td><input type='text' name='direccion' value='$direccion'></td>";
                 echo "<td><input type='number' name='telefono' value='$telefono'></td>";
-                echo "<td><input type='text' name='correo' value='$correo'></td>";
+                echo "<td><input type='email' name='correo' value='$correo'></td>";
                 echo "<td><input type='text' name='contraseña' value='$contraseña'></td>";
                 echo "<td><input type='text' name='dni' value='$dni'></td>";
-                echo "<td><input type='text' name='token' value='$token' readonly></td>";
-                echo "<td><input type='number' name='rol' value='$rol'></td>";
+                echo "<td>$token</td>";
+                echo "<td><input type='number' name='rol' min='0' max='1' value='$rol'></td>";
 
                 echo '<td><button type="submit" name="guardar">Guardar</button></td>';
 
@@ -115,7 +184,7 @@ $tabla = $_GET["table"];
                 echo "<td><input type='text' name='descripcion' value='$descripcion'></td>";
                 echo "<td><input type='number' name='precio' value='$precio'></td>";
                 echo "<td><input type='text' name='imagen' value='$imagen'></td>";
-                echo "<td><input type='number' name='activa' value='$activa'></td>";
+                echo "<td><input type='number' name='activa' min='0' max='1' value='$activa'></td>";
                 echo "<td><input type='text' name='fecha' value='$fecha' readonly></td>";
                 echo "<td><input type='text' name='descripcion_larga' value='$descripcion_larga'></td>";
 
@@ -164,7 +233,7 @@ $tabla = $_GET["table"];
                 echo "<td><input type='text' name='descripcion' value='$descripcion'></td>";
                 echo "<td><input type='number' name='precio' value='$precio'></td>";
                 echo "<td><input type='text' name='imagen' value='$imagen'></td>";
-                echo "<td><input type='number' name='activa' value='$activa'></td>";
+                echo "<td><input type='number' name='activa' min='0' max='1' value='$activa'></td>";
                 echo "<td><input type='text' name='fecha' value='$fecha' readonly></td>";
                 echo "<td><input type='text' name='descripcion_larga' value='$descripcion_larga'></td>";
 
@@ -213,7 +282,7 @@ $tabla = $_GET["table"];
                 echo "<td><input type='text' name='descripcion' value='$descripcion'></td>";
                 echo "<td><input type='number' name='precio' value='$precio'></td>";
                 echo "<td><input type='text' name='imagen' value='$imagen'></td>";
-                echo "<td><input type='number' name='activa' value='$activa'></td>";
+                echo "<td><input type='number' name='activa' min='0' max='1' value='$activa'></td>";
                 echo "<td><input type='text' name='fecha' value='$fecha' readonly></td>";
                 echo "<td><input type='text' name='descripcion_larga' value='$descripcion_larga'></td>";
 

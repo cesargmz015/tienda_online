@@ -1,5 +1,5 @@
 window.onload = () => {
-    const meterAlCarrito = (id_producto, id_usuario, cantidad_nueva) => {
+    const meterAlCarrito = (id_producto, id_usuario, cantidad_nueva, tabla) => {
         //COMPROBAMOS SI EL USUARIO EXISTE
         if (id_usuario == null || id_usuario === "undefined" || id_usuario == 0) {
             //COMPRUEBO SI HAY CARRITO
@@ -7,6 +7,7 @@ window.onload = () => {
                 //SI NO HAY CARRITO CREO EL CARRITO Y AÑADO 1 DEL PRODUCTO
                 localStorage.setItem("carrito", JSON.stringify({
                     id_producto: id_producto,
+                    tabla: tabla,
                     cantidad: cantidad_nueva
                 }));
                 console.log("añadido correctamente");
@@ -25,7 +26,7 @@ window.onload = () => {
                 for (let i = 0; i < productos.length; i++) {
                     producto = JSON.parse(productos[i]);
                     // COMPRUEBO SI EXISTE EL PRODUCTO
-                    if (producto.id_producto == id_producto) {
+                    if (producto.id_producto == id_producto && producto.tabla == tabla) {
                         // SI EXISTE SUMO 1 Y CAMBIO LA VARIABLE DE CANTIDAD
                         existe = true;
                         producto.cantidad = cantidad_nueva;
@@ -38,6 +39,7 @@ window.onload = () => {
                     // AÑADO EL PRODUCTO AL FINAL DEL STRING
                     const productoNuevo = JSON.stringify({
                         id_producto: id_producto,
+                        tabla: tabla,
                         cantidad: cantidad_nueva
                     });
                     localStorage.setItem("carrito", localStorage.getItem("carrito") + "&" + productoNuevo);
@@ -60,18 +62,20 @@ window.onload = () => {
                     const productoJSON = JSON.parse(producto);
                     const id = productoJSON.id_producto;
                     const cantidad = productoJSON.cantidad;
+                    const tabla = productoJSON.tabla;
                     html += `
-            <div>
-                <h2>Producto: ${id}</h2>
-                <h3>Cantidad: ${cantidad}</h3>
-            </div>
-        `;
+                        <div>
+                            <h2>Producto: ${id}</h2>
+                            <h3>Tabla: ${tabla}</h3>
+                            <h3>Cantidad: ${cantidad}</h3>
+                        </div>
+                    `;
                     const div_productos = document.querySelector(".div-productos");
                     div_productos.innerHTML = html;
                 });
             });
         } else {
-            fetch(`procesar-carrito.php?id_producto=${id_producto}&cantidad=${cantidad_nueva}`)
+            fetch(`procesar-carrito.php?id_producto=${id_producto}&cantidad=${cantidad_nueva}&tabla=${tabla}`)
                 .then(response => response.json())
                 .then(response => {
                     if (response) {
@@ -80,11 +84,14 @@ window.onload = () => {
                             response.forEach(producto => {
                                 const id = producto.Producto;
                                 const cantidad = producto.Cantidad;
+                                const tabla = producto.Tabla;
                                 html += `
                                 <div>
                                     <h2>Producto: ${id}</h2>
+                                    <h3>Tabla: ${tabla}</h3>
                                     <h3>Cantidad: ${cantidad}</h3>
-                                </div>
+                                    </div>
+                                    <hr>
                                 `;
                             });
                             const div_productos = document.querySelector(".div-productos");
@@ -103,7 +110,6 @@ window.onload = () => {
     const id_producto = params.get('id');
     const id_usuario = params.get('id_usuario');
     const cantidad_nueva = params.get('cantidad');
-    meterAlCarrito(id_producto, id_usuario, cantidad_nueva);
-
-}
-
+    const tabla = params.get('tabla');
+    meterAlCarrito(id_producto, id_usuario, cantidad_nueva, tabla);
+};

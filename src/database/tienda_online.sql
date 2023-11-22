@@ -77,7 +77,12 @@ CREATE TABLE
         `id_producto` int(15) NOT NULL,
         `id_usuario` int(15) NOT NULL,
         `cantidad` int(8) NOT NULL,
-        PRIMARY KEY (`id_producto`, `id_usuario`)
+        `tabla` varchar(255) NOT NULL,
+        PRIMARY KEY (
+            `id_producto`,
+            `id_usuario`,
+            `tabla`
+        )
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 --
