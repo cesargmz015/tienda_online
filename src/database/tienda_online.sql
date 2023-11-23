@@ -70,20 +70,20 @@ CREATE TABLE
 
 --
 
--- crear tabla carrito
+-- Estructura de tabla para la tabla `carrito`
 
 CREATE TABLE
     `carrito` (
-        `id_producto` int(15) NOT NULL,
-        `id_usuario` int(15) NOT NULL,
-        `cantidad` int(8) NOT NULL,
+        `id_producto` int(11) NOT NULL,
+        `id_usuario` int(11) NOT NULL,
+        `cantidad` int(10000000) NOT NULL,
         `tabla` varchar(255) NOT NULL,
         PRIMARY KEY (
             `id_producto`,
             `id_usuario`,
             `tabla`
         )
-    ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+    ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci
 
 --
 
@@ -149,7 +149,24 @@ CREATE TABLE
         `rol` tinyint(1) NOT NULL
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
+
+-- Estructura de tabla para la tabla `comentarios`
+
+--
+
+CREATE TABLE
+    `comentarios` (
+        `id_comentario` int(11) NOT NULL AUTO_INCREMENT,
+        `id_producto` int(11) NOT NULL,
+        `id_usuario` int(11) NOT NULL,
+        `nombre_usuario` varchar(255) NOT NULL,
+        `comentario` text NOT NULL,
+        `tabla` varchar(255) NOT NULL,
+        PRIMARY KEY (`id_comentario`)
+    ) ENGINE = InnoDB AUTO_INCREMENT = 24 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci
 
 -- Índices para tablas volcadas
 

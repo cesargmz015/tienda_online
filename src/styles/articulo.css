@@ -189,7 +189,7 @@ article {
 }
 
 .titulo-comentario {
-    margin-top: 30px;
+    padding-top: 30px;
 }
 
 .seccion-comentarios textarea {
@@ -205,6 +205,22 @@ article {
     cursor: pointer;
     color: inherit;
     text-align: inherit;
+}
+
+.parrafo-comentario {
+    padding-right: 30%;
+    padding-left: 30%;
+}
+
+.parrafo-comentario p {
+    overflow-wrap: break-word;
+}
+
+.hr-comments {
+    margin: 50px 35%;
+    border: none;
+    height: 1px;
+    background-color: black;
 }
 
 .div_footer {

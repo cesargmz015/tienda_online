@@ -20,52 +20,10 @@ if (isset($_GET["id"])) {
     <title>Tienda</title>
     <link rel="stylesheet" href="../styles/articulo.css">
     <script src="../js/functions.js" defer></script>
+    <script src="../js/cantidad-carrito.js" defer></script>
+    <script src="../js/validaciones.js" defer></script>
+    <script src="../js/comentarios.js" defer></script>
     <link rel="shortcut icon" href="../img/logo-tienda.ico" type="image/x-icon">
-    <script>
-        const agregarCantidadACarrito = (id, id_usuario, tabla) => {
-            let cantidad = document.getElementById('cantidad-carrito').value;
-            if (cantidad == "" || cantidad == 0) {
-                cantidad = 1;
-            }
-            console.log(tabla);
-            window.location.href = `./carrito.php?id=${id}&id_usuario=${id_usuario}&cantidad=${cantidad}&tabla=${tabla}`;
-            console.log("cantidad correcta");
-        }
-        const validarFormularioLogin = () => {
-            const email = document.forms["formLogin"]["email"].value;
-            const password = document.forms["formLogin"]["password"].value;
-
-            if (email == "" || password == "") {
-                alert("Todos los campos deben ser llenados");
-                return false;
-            }
-
-            return true;
-        }
-
-        const validarFormularioRegistro = () => {
-            const nombre = document.forms["formRegistro"]["nombre"].value;
-            const apellidos = document.forms["formRegistro"]["apellidos"].value;
-            const dni = document.forms["formRegistro"]["dni"].value;
-            const direccion = document.forms["formRegistro"]["direccion"].value;
-            const telefono = document.forms["formRegistro"]["telefono"].value;
-            const email = document.forms["formRegistro"]["email"].value;
-            const password = document.forms["formRegistro"]["password"].value;
-            const terminos = document.forms["formRegistro"]["terminos"].checked;
-
-            if (nombre == "" || apellidos == "" || dni == "" || direccion == "" || telefono == "" || email == "" || password == "") {
-                alert("Todos los campos deben ser llenados");
-                return false;
-            }
-
-            if (!terminos) {
-                alert("Debe aceptar los términos y condiciones");
-                return false;
-            }
-
-            return true;
-        }
-    </script>
 </head>
 
 <body>
@@ -156,6 +114,33 @@ if (isset($_GET["id"])) {
             <section class="descripcion_larga">
                 <p><?= $descripcion_larga ?>
                 </p>
+            </section>
+            <hr class="hr-main">
+            <section class="seccion-comentarios">
+                <form action="" method="post" onsubmit="return agregarComentario(<?= $id ?>, <?= $id_usuario ?>, 'destacados')">
+                    <?php
+                    if (isset($_POST["boton-comentario"])) {
+                        $texto = $_POST["comentario"];
+                        $sudadera->insertarDatos("INSERT INTO comentarios (id_producto, id_usuario, nombre_usuario, comentario, tabla) VALUES ('$id', '$id_usuario', '{$_SESSION["nombre"]}', '$texto', 'destacados')");
+                    }
+
+                    $comentario = $sudadera->obtenerDatos("SELECT nombre_usuario, comentario FROM comentarios WHERE id_producto = '$id' AND tabla = 'destacados' ORDER BY id_comentario DESC");
+                    $comentarios = $sudadera->convertirDatos($comentario);
+                    echo "<textarea name='comentario' id='comentario' placeholder='Escribe tu comentario'></textarea><button type='submit' name='boton-comentario' class='boton-comentarios'><span>Añadir comentario</span></button>";
+                    if ($comentario->num_rows <= 0) {
+                        echo "<p>Aún no hay comentarios para este producto</p>";
+                    } else {
+                        echo "<h2 class='titulo-comentario'>Comentarios</h2>";
+                        for ($i = 0; $i < count($comentarios); $i++) {
+                            $nombre_usuario = $comentarios[$i]->nombre_usuario;
+                            $comentario_tabla = $comentarios[$i]->comentario;
+                            echo "<hr class='hr-main'>";
+                            echo "<h3>$nombre_usuario:</h3>";
+                            echo "<div class='parrafo-comentario'><p>$comentario_tabla</p></div>";
+                        }
+                    }
+                    ?>
+                </form>
             </section>
         </article>
     </main>
