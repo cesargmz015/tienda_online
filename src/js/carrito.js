@@ -54,24 +54,27 @@ window.onload = () => {
             }
             imprimir_carrito.addEventListener("click", () => {
                 const productos = localStorage.getItem("carrito");
-                const arrayProductos = productos.split("&");
+                const arrayProductos = productos.split("&").reverse();
 
-                let html = "";
+                let div = "";
+                let titulo = `<h1>Carrito</h1>`;
 
                 arrayProductos.forEach(producto => {
                     const productoJSON = JSON.parse(producto);
                     const id = productoJSON.id_producto;
                     const cantidad = productoJSON.cantidad;
                     const tabla = productoJSON.tabla;
-                    html += `
+                    div += `
                         <div>
                             <h2>Producto: ${id}</h2>
                             <h3>Tabla: ${tabla}</h3>
                             <h3>Cantidad: ${cantidad}</h3>
                         </div>
                     `;
+                    const titulo_carrito = document.querySelector(".titulo-carrito");
+                    titulo_carrito.innerHTML = titulo;
                     const div_productos = document.querySelector(".div-productos");
-                    div_productos.innerHTML = html;
+                    div_productos.innerHTML = div;
                 });
             });
         } else {
@@ -80,7 +83,10 @@ window.onload = () => {
                 .then(response => {
                     if (response) {
                         imprimir_carrito.addEventListener("click", () => {
+
                             let html = "";
+                            let titulo = `<h1>Carrito</h1>`;
+
                             response.forEach(producto => {
                                 const id = producto.Producto;
                                 const cantidad = producto.Cantidad;
@@ -91,9 +97,10 @@ window.onload = () => {
                                     <h3>Tabla: ${tabla}</h3>
                                     <h3>Cantidad: ${cantidad}</h3>
                                     </div>
-                                    <hr>
                                 `;
                             });
+                            const div_titulo = document.querySelector(".titulo-carrito");
+                            div_titulo.innerHTML = titulo;
                             const div_productos = document.querySelector(".div-productos");
                             div_productos.innerHTML = html;
                         });

@@ -12,6 +12,11 @@ html {
     }
 
     margin-top: 40px;
+    position: sticky;
+    top: 20px;
+    background-color: white;
+    padding-top: 20px;
+    padding-bottom: 10px;
 }
 
 .form-sudaderas,
@@ -25,6 +30,7 @@ html {
     top: 0;
     z-index: 1;
     background-color: white;
+    padding-top: 10px;
 }
 
 table {

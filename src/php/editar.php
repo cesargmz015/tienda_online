@@ -137,7 +137,12 @@ $tabla = $_GET["table"];
                 echo "<td><input type='text' name='contraseña' value='$contraseña'></td>";
                 echo "<td><input type='text' name='dni' value='$dni'></td>";
                 echo "<td>$token</td>";
-                echo "<td><input type='number' name='rol' min='0' max='1' value='$rol'></td>";
+                echo "<td>
+                    <select name='activa'>
+                        <option value='1' " . ($rol == 1 ? "selected" : "") . ">1</option>
+                        <option value='0' " . ($rol == 0 ? "selected" : "") . ">0</option>
+                    </select>
+                </td>";
 
                 echo '<td><button type="submit" name="guardar">Guardar</button></td>';
 
@@ -166,7 +171,7 @@ $tabla = $_GET["table"];
 
                 echo "<table class='tabla'>";
                 echo "<tr>";
-                echo "<th>Id</th><th>Nombre</th><th>Descripcion</th><th>Precio</th><th>Imagen</th><th>Activa</th><th>Fecha modificaciones</th><th>Descripcion larga</th>";
+                echo "<th>Tabla</th><th>Id</th><th>Nombre</th><th>Descripcion</th><th>Precio</th><th>Imagen</th><th>Activa</th><th>Fecha modificaciones</th><th>Descripcion larga</th>";
                 echo "</tr>";
 
                 $id = $sudadera[0]->id;
@@ -179,12 +184,18 @@ $tabla = $_GET["table"];
                 $descripcion_larga = $sudadera[0]->descripcion_larga;
 
                 echo "<tr>";
+                echo "<td>$tabla</td>";
                 echo "<td>$id</td>";
                 echo "<td><input type='text' name='nombre' value='$nombre'></td>";
                 echo "<td><input type='text' name='descripcion' value='$descripcion'></td>";
                 echo "<td><input type='number' name='precio' value='$precio'></td>";
                 echo "<td><input type='text' name='imagen' value='$imagen'></td>";
-                echo "<td><input type='number' name='activa' min='0' max='1' value='$activa'></td>";
+                echo "<td>
+                    <select name='activa'>
+                        <option value='1' " . ($activa == 1 ? "selected" : "") . ">1</option>
+                        <option value='0' " . ($activa == 0 ? "selected" : "") . ">0</option>
+                    </select>
+                </td>";
                 echo "<td><input type='text' name='fecha' value='$fecha' readonly></td>";
                 echo "<td><input type='text' name='descripcion_larga' value='$descripcion_larga'></td>";
 
@@ -215,7 +226,7 @@ $tabla = $_GET["table"];
 
                 echo "<table class='tabla'>";
                 echo "<tr>";
-                echo "<th>Id</th><th>Nombre</th><th>Descripcion</th><th>Precio</th><th>Imagen</th><th>Activa</th><th>Fecha modificaciones</th><th>Descripcion larga</th>";
+                echo "<th>Tabla</th><th>Id</th><th>Nombre</th><th>Descripcion</th><th>Precio</th><th>Imagen</th><th>Activa</th><th>Fecha modificaciones</th><th>Descripcion larga</th>";
                 echo "</tr>";
 
                 $id = $sudadera[0]->id;
@@ -228,12 +239,18 @@ $tabla = $_GET["table"];
                 $descripcion_larga = $sudadera[0]->descripcion_larga;
 
                 echo "<tr>";
+                echo "<td>$tabla</td>";
                 echo "<td>$id</td>";
                 echo "<td><input type='text' name='nombre' value='$nombre'></td>";
                 echo "<td><input type='text' name='descripcion' value='$descripcion'></td>";
                 echo "<td><input type='number' name='precio' value='$precio'></td>";
                 echo "<td><input type='text' name='imagen' value='$imagen'></td>";
-                echo "<td><input type='number' name='activa' min='0' max='1' value='$activa'></td>";
+                echo "<td>
+                    <select name='activa'>
+                        <option value='1' " . ($activa == 1 ? "selected" : "") . ">1</option>
+                        <option value='0' " . ($activa == 0 ? "selected" : "") . ">0</option>
+                    </select>
+                </td>";
                 echo "<td><input type='text' name='fecha' value='$fecha' readonly></td>";
                 echo "<td><input type='text' name='descripcion_larga' value='$descripcion_larga'></td>";
 
@@ -264,7 +281,7 @@ $tabla = $_GET["table"];
 
                 echo "<table class='tabla'>";
                 echo "<tr>";
-                echo "<th>Id</th><th>Nombre</th><th>Descripcion</th><th>Precio</th><th>Imagen</th><th>Activa</th><th>Fecha modificaciones</th><th>Descripcion larga</th>";
+                echo "<th>Tabla</th><th>Id</th><th>Nombre</th><th>Descripcion</th><th>Precio</th><th>Imagen</th><th>Activa</th><th>Fecha modificaciones</th><th>Descripcion larga</th>";
                 echo "</tr>";
 
                 $id = $sudadera[0]->id;
@@ -277,12 +294,18 @@ $tabla = $_GET["table"];
                 $descripcion_larga = $sudadera[0]->descripcion_larga;
 
                 echo "<tr>";
+                echo "<td>$tabla</td>";
                 echo "<td>$id</td>";
                 echo "<td><input type='text' name='nombre' value='$nombre'></td>";
                 echo "<td><input type='text' name='descripcion' value='$descripcion'></td>";
                 echo "<td><input type='number' name='precio' value='$precio'></td>";
                 echo "<td><input type='text' name='imagen' value='$imagen'></td>";
-                echo "<td><input type='number' name='activa' min='0' max='1' value='$activa'></td>";
+                echo "<td>
+                    <select name='activa'>
+                        <option value='1' " . ($activa == 1 ? "selected" : "") . ">1</option>
+                        <option value='0' " . ($activa == 0 ? "selected" : "") . ">0</option>
+                    </select>
+                </td>";
                 echo "<td><input type='text' name='fecha' value='$fecha' readonly></td>";
                 echo "<td><input type='text' name='descripcion_larga' value='$descripcion_larga'></td>";
 

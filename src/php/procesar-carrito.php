@@ -23,7 +23,7 @@ if ($datos->num_rows <= 0) {
     $insercion2 = $conexionBBDD->insertarDatos("UPDATE carrito SET cantidad = '$cantidad' WHERE id_producto = '$id_producto' AND id_usuario = '$id_usuario' AND tabla = '$tabla'");
 }
 
-$carrito = $conexionBBDD->obtenerDatos("SELECT * FROM carrito WHERE id_usuario = '$id_usuario'");
+$carrito = $conexionBBDD->obtenerDatos("SELECT * FROM carrito WHERE id_usuario = '$id_usuario' ORDER BY id_producto_en_carrito DESC");
 $carrito = $conexionBBDD->convertirDatos($carrito);
 
 $respuesta_consulta = array();

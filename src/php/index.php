@@ -49,6 +49,7 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
             </div>
             <?php
             $vista = "<button type='button' id='boton-vista' onclick='window.location.href=\"./index2.php\"'><span>Vista completa</span></button>";
+            $boton_carrito = "<button type='button' onclick='window.location.href=\"./mostrar-carrito.php\"'><span>Carrito</span></button>";
             ?>
             <div class="botones_header">
                 <?php if (isset($_SESSION["id"])) { ?>
@@ -63,7 +64,10 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
                     <button type="button" id="boton-login"><span>Login</span></button>
                     <button type="button" id="boton-registro"><span>Sign up</span></button>
                 <?php } ?>
-                <?php echo $vista ?>
+                <?php
+                echo $boton_carrito;
+                echo $vista;
+                ?>
                 <br>
             </div>
         </div>

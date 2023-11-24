@@ -54,20 +54,26 @@ if (isset($_GET["id"])) {
                 </span>
             </div>
             <?php
+            $boton_carrito = "<button type='button' onclick='window.location.href=\"./mostrar-carrito.php\"'><span>Carrito</span></button>";
+            ?>
+            <?php
             if (isset($_SESSION["id"])) { ?>
                 <div class="botones_header">
                     <label>
                         Bienvenido <?= $_SESSION["nombre"] ?>
                     </label>
                     <button type="button" onclick="window.location.href='./logout.php'"><span>Logout</span></button>
+                    <?php echo $boton_carrito; ?>
                     <?php if ($_SESSION["rol"] > 0) { ?>
                         <button type="button" onclick="window.location.href='./admin.php'"><span>Admin</span></button>
+                        <?php echo $boton_carrito; ?>
                     <?php } ?>
                 </div>
             <?php } else { ?>
                 <div class="botones_header">
                     <button type="button" id="boton-login"><span>Login</span></button>
                     <button type="button" id="boton-registro"><span>Sign up</span></button>
+                    <?php echo $boton_carrito; ?>
                 </div>
             <?php } ?>
         </div>

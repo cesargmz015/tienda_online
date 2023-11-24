@@ -1,0 +1,28 @@
+body {
+    text-align: center;
+}
+
+.div-productos {
+    display: grid;
+    grid-template-columns: 33.33% 33.33% 33.33%;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.div-productos div {
+    flex-basis: calc(25% - 20px);
+    background-color: #f8f8f8;
+    margin-bottom: 30px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    margin: 35px;
+}
+
+.div-productos h2, .div-productos h3 {
+    margin: 0 0 10px 0;
+}
+
+.titulo-carrito {
+    margin-bottom: -40px;
+}

@@ -134,60 +134,73 @@ window.onload = () => {
     // btn_prev_carrusel2.style.display = 'none';
     // btn_prev_carrusel3.style.display = 'none';
 
-    btn_prev_carrusel1.style.opacity = '.7';
-    btn_prev_carrusel1.style.pointerEvents = 'none';
-    btn_prev_carrusel2.style.opacity = '.7';
-    btn_prev_carrusel2.style.pointerEvents = 'none';
-    btn_prev_carrusel3.style.opacity = '.7';
-    btn_prev_carrusel3.style.pointerEvents = 'none';
+    if (btn_prev_carrusel1 && btn_prev_carrusel2 && btn_prev_carrusel3) {
+        btn_prev_carrusel1.style.opacity = '.7';
+        btn_prev_carrusel1.style.pointerEvents = 'none';
+        btn_prev_carrusel2.style.opacity = '.7';
+        btn_prev_carrusel2.style.pointerEvents = 'none';
+        btn_prev_carrusel3.style.opacity = '.7';
+        btn_prev_carrusel3.style.pointerEvents = 'none';
+    }
 
     // Para rastrear la galería actual
     let indiceActualCarrusel1 = 0;
     let indiceActualCarrusel2 = 0;
     let indiceActualCarrusel3 = 0;
 
-    btn_prev_carrusel1.addEventListener('click', function() {
-        if (indiceActualCarrusel1 > 0) {
-            indiceActualCarrusel1--;
-            actualizarCarrusel1();
-        }
-    });
+    if (btn_prev_carrusel1) {
+        btn_prev_carrusel1.addEventListener('click', function() {
+            if (indiceActualCarrusel1 > 0) {
+                indiceActualCarrusel1--;
+                actualizarCarrusel1();
+            }
+        });
+    }
 
-    btn_next_carrusel1.addEventListener('click', function() {
-        if (indiceActualCarrusel1 < galeria_carrusel1.length - 1) {
-            indiceActualCarrusel1++;
-            actualizarCarrusel1();
-        }
-    });
+    if (btn_next_carrusel1) {
+        btn_next_carrusel1.addEventListener('click', function() {
+            if (indiceActualCarrusel1 < galeria_carrusel1.length - 1) {
+                indiceActualCarrusel1++;
+                actualizarCarrusel1();
+            }
+        });
+    }
 
-    btn_prev_carrusel2.addEventListener('click', function() {
-        if (indiceActualCarrusel2 > 0) {
-            indiceActualCarrusel2--;
-            actualizarCarrusel2();
-        }
-    });
+    if (btn_prev_carrusel2) {
+        btn_prev_carrusel2.addEventListener('click', function() {
+            if (indiceActualCarrusel2 > 0) {
+                indiceActualCarrusel2--;
+                actualizarCarrusel2();
+            }
+        });
+    }
 
-    btn_next_carrusel2.addEventListener('click', function() {
-        if (indiceActualCarrusel2 < galeria_carrusel2.length - 1) {
-            indiceActualCarrusel2++;
-            actualizarCarrusel2();
-        }
-    });
+    if (btn_next_carrusel2) {
+        btn_next_carrusel2.addEventListener('click', function() {
+            if (indiceActualCarrusel2 < galeria_carrusel2.length - 1) {
+                indiceActualCarrusel2++;
+                actualizarCarrusel2();
+            }
+        });
+    }
 
-    btn_prev_carrusel3.addEventListener('click', function() {
-        if (indiceActualCarrusel3 > 0) {
-            indiceActualCarrusel3--;
-            actualizarCarrusel3();
-        }
-    });
+    if (btn_prev_carrusel3) {
+        btn_prev_carrusel3.addEventListener('click', function() {
+            if (indiceActualCarrusel3 > 0) {
+                indiceActualCarrusel3--;
+                actualizarCarrusel3();
+            }
+        });
+    }
 
-    btn_next_carrusel3.addEventListener('click', function() {
-        if (indiceActualCarrusel3 < galeria_carrusel3.length - 1) {
-            indiceActualCarrusel3++;
-            actualizarCarrusel3();
-        }
-    });
-
+    if (btn_next_carrusel3) {
+        btn_next_carrusel3.addEventListener('click', function() {
+            if (indiceActualCarrusel3 < galeria_carrusel3.length - 1) {
+                indiceActualCarrusel3++;
+                actualizarCarrusel3();
+            }
+        });
+    }
     function actualizarCarrusel1() {
         const desplazamiento = indiceActualCarrusel1 * 100;
         galeria_carrusel1.forEach(galeria => {

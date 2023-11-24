@@ -49,6 +49,7 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
             </div>
             <?php
             $vista = "<button type='button' id='boton-vista' onclick='window.location.href=\"./index.php\"'><span>Vista secciones</span></button>";
+            $boton_carrito = "<button type='button' onclick='window.location.href=\"./mostrar-carrito.php\"'><span>Carrito</span></button>";
             ?>
             <div class="botones_header">
                 <?php if (isset($_SESSION["id"])) { ?>
@@ -63,7 +64,10 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
                     <button type="button" id="boton-login"><span>Login</span></button>
                     <button type="button" id="boton-registro"><span>Sign up</span></button>
                 <?php } ?>
-                <?php echo $vista ?>
+                <?php
+                echo $boton_carrito;
+                echo $vista
+                ?>
             </div>
         </div>
         <hr class="hr-header">
@@ -71,7 +75,7 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
     <main>
         <div class="carrusel">
             <?php
-            $datos = $sudadera->obtenerDatos("SELECT * FROM novedades UNION ALL SELECT * FROM destacados UNION ALL SELECT * FROM ofertas");
+            $datos = $sudadera->obtenerDatos("SELECT *, 'novedades' as tabla FROM novedades UNION ALL SELECT *, 'destacados' as tabla FROM destacados UNION ALL SELECT *, 'ofertas' as tabla FROM ofertas");
             $sudaderas = $sudadera->convertirDatos($datos);
             $numGalerias = ceil(count($sudaderas) / 4);
 
@@ -82,10 +86,11 @@ $sudadera = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
                         <?php
                         for ($i = $g * 4; $i < min(($g + 1) * 4, count($sudaderas)); $i++) {
                             $id = $sudaderas[$i]->id;
+                            $tabla = $sudaderas[$i]->tabla;
                             $indiceAleatorio = rand(0, count($sudaderas) - 1);
                             $imagen = $sudaderas[$indiceAleatorio]->imagen;
                         ?>
-                            <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./novedades.php?id=<?= $id ?>&imgIndex=<?= urlencode($imagen) ?>'">
+                            <img src="<?= $imagen ?>" alt="Camiseta" onclick="window.location.href='./<?= $tabla ?>.php?id=<?= $id ?>&imgIndex=<?= urlencode($imagen) ?>'">
                         <?php
                         }
                         ?>

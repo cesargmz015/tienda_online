@@ -74,16 +74,18 @@ CREATE TABLE
 
 CREATE TABLE
     `carrito` (
-        `id_producto` int(11) NOT NULL,
-        `id_usuario` int(11) NOT NULL,
-        `cantidad` int(10000000) NOT NULL,
-        `tabla` varchar(255) NOT NULL,
-        PRIMARY KEY (
+        `id_producto_en_carrito` INT AUTO_INCREMENT,
+        `id_producto` INT(11) NOT NULL,
+        `id_usuario` INT(11) NOT NULL,
+        `cantidad` INT(11) NOT NULL,
+        `tabla` VARCHAR(255) NOT NULL,
+        PRIMARY KEY (`id_producto_en_carrito`),
+        KEY (
             `id_producto`,
             `id_usuario`,
             `tabla`
         )
-    ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci
+    ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 --
 

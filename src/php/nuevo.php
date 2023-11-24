@@ -12,34 +12,7 @@ $conexionBBDD = new conexionBBDD("root", "", "127.0.0.1:3306", "tienda_online");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../styles/editar.css">
-    <script>
-        const validarFormulario = () => {
-            const tabla = document.forms["form"]["tabla"].value;
-            const nombre = document.forms["form"]["nombre"].value;
-            const descripcion = document.forms["form"]["descripcion"].value;
-            const precio = document.forms["form"]["precio"].value;
-            const imagen = document.forms["form"]["imagen"].value;
-            const activa = document.forms["form"]["activa"].value;
-            const descripcion_larga = document.forms["form"]["descripcion_larga"].value;
-
-            if (tabla == "" || nombre == "" || descripcion == "" || precio == "" || imagen == "" || activa == "" || descripcion_larga == "") {
-                alert("Todos los campos deben ser llenados");
-                return false;
-            }
-
-            if (isNaN(precio)) {
-                alert("El precio debe ser un número");
-                return false;
-            }
-
-            if (activa != "0" && activa != "1") {
-                alert("Activa debe ser 0 o 1");
-                return false;
-            }
-
-            return true;
-        }
-    </script>
+    <script src="../js/nuevo.js" defer></script>
 </head>
 
 <body>
