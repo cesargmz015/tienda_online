@@ -12,13 +12,23 @@ Este proyecto es una página web de tipo tienda online creada como práctica par
 - Al crear nuevos articulos, se puede subir la imagen del articulo. 
 - <b>IMPORTANTE: la pagina de index.php e index2.php estan configuradas para que cada vez que se recargan muestren aleatoriamente las imagenes de los productos guardadas entre todos los productos para hacerla mas divertida, por lo que las imagenes de los productos no se corresponden con la imagen de cada producto en sí; pero esto no seria una situacion real logicamente(para que no lleve a confusión al crear un nuevo artículo y no ver la imagen del articulo con el articulo que correspondería.)</b>
 
+# .HTACCESS
+No he podido implementar el archivo .htaccess ya que me fallan todas las url y redirecciones. Pero aquí explico como lo implementaría:
+
+```
+RewriteEngine On    # Activa el motor de reescritura
+
+# Reescribe la URL 'pagina.php?id=123' como 'pagina/123'
+RewriteRule ^pagina/([0-9]+)/?$ pagina.php?id=$1 [NC,L]
+```
+
 # Tecnologías Utilizadas
 - HTML, CSS y JavaScript para la UI (frontend).
 - PHP para el backend.
 - MySQL para la base de datos.
 - AJAX para la actualización dinámica.
 
-# Inicio y ejecucion de la pagina web
+# Inicio y ejecución de la pagina web
 - Puerto MySQL utilizado: 3306.
 - Para iniciar el proyecto, primero importe el archivo SQL desde la carpeta database.
 - Después navegue a `tienda_online/src/php/index.php` para iniciar desde el index.
