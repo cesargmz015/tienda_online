@@ -10,7 +10,7 @@ Este proyecto es una página web de tipo tienda online creada como práctica par
 - En el boton administración se puede configurar toda la pagina desde el panel de admin al que solo puede acceder el admin o el usuario autorizado.
 - Desde el panel de admin, se puede editar y eliminar todos los usuarios y articulos de la pagina web, ademas de crear e insertar nuevos articulos.
 - Al crear nuevos articulos, se puede subir la imagen del articulo. 
-- <b>(IMPORTANTE: la pagina de index.php e index2.php estan configuradas para que cada vez que se recargan muestren aleatoriamente las imagenes de los productos guardadas entre todos los productos para hacerla mas divertida, por lo que las imagenes de los productos no se corresponden con la imagen de cada producto en sí; pero esto no seria una situacion real logicamente(para que no lleve a confusión al crear un nuevo artículo y no ver la imagen del articulo con el articulo que correspondería.))</b>
+- <b>IMPORTANTE: la pagina de index.php e index2.php estan configuradas para que cada vez que se recargan muestren aleatoriamente las imagenes de los productos guardadas entre todos los productos para hacerla mas divertida, por lo que las imagenes de los productos no se corresponden con la imagen de cada producto en sí; pero esto no seria una situacion real logicamente(para que no lleve a confusión al crear un nuevo artículo y no ver la imagen del articulo con el articulo que correspondería.)</b>
 
 # Tecnologías Utilizadas
 - HTML, CSS y JavaScript para la UI (frontend).
