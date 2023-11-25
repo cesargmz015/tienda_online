@@ -24,7 +24,7 @@ $id_usuario = isset($_SESSION["id"]) ? $_SESSION["id"] : null;
                     if (productos) {
                         const arrayProductos = productos.split("&").reverse();
 
-                        arrayProductos.forEach(producto => {
+                        arrayProductos.forEach((producto, index) => {
                             const productoJSON = JSON.parse(producto);
                             const id = productoJSON.id_producto;
                             const cantidad = productoJSON.cantidad;
@@ -34,6 +34,7 @@ $id_usuario = isset($_SESSION["id"]) ? $_SESSION["id"] : null;
                                 <h2>Producto: ${id}</h2>
                                 <h3>Tabla: ${tabla}</h3>
                                 <h3>Cantidad: ${cantidad}</h3>
+                                <button type="button" onclick="eliminarProducto(${index})">Eliminar</button>
                             </div>
                         `;
                         });
@@ -65,6 +66,36 @@ $id_usuario = isset($_SESSION["id"]) ? $_SESSION["id"] : null;
             }
 
             imprimir_carrito();
+        }
+
+        const eliminarProducto = (index) => {
+            let productos = localStorage.getItem("carrito");
+            if (productos) {
+                let arrayProductos = productos.split("&").reverse();
+                arrayProductos.splice(index, 1);
+                localStorage.setItem("carrito", arrayProductos.reverse().join("&"));
+                console.log("Producto eliminado del carrito");
+                alert("Producto eliminado del carrito");
+                location.reload(); // Recarga la página para actualizar la lista de productos
+            }
+        }
+
+        const eliminarProductoBD = (index) => {
+            console.log(index);
+            fetch(`./eliminar-producto-carrito.php?id_producto_en_carrito=${index}`)
+                .then(response => response.text())
+                .then(data => {
+                    let titulo = `<h1>Carrito</h1>`;
+                    let div = data;
+
+                    if (!data) {
+                        div = "<p>El carrito está vacío</p>";
+                    }
+
+                    console.log("Producto eliminado del carrito");
+                    alert("Producto eliminado del carrito");
+                    location.reload(); // Recarga la página para actualizar la lista de productos
+                });
         }
     </script>
 </head>

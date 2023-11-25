@@ -52,58 +52,53 @@ window.onload = () => {
                     console.log("añadido correctamente");
                 }
             }
-            imprimir_carrito.addEventListener("click", () => {
-                const productos = localStorage.getItem("carrito");
-                const arrayProductos = productos.split("&").reverse();
+            const productos = localStorage.getItem("carrito");
+            const arrayProductos = productos.split("&").reverse();
 
-                let div = "";
-                let titulo = `<h1>Carrito</h1>`;
+            let div = "";
+            let titulo = `<h1>Carrito</h1>`;
 
-                arrayProductos.forEach(producto => {
-                    const productoJSON = JSON.parse(producto);
-                    const id = productoJSON.id_producto;
-                    const cantidad = productoJSON.cantidad;
-                    const tabla = productoJSON.tabla;
-                    div += `
+            arrayProductos.forEach(producto => {
+                const productoJSON = JSON.parse(producto);
+                const id = productoJSON.id_producto;
+                const cantidad = productoJSON.cantidad;
+                const tabla = productoJSON.tabla;
+                div += `
                         <div>
                             <h2>Producto: ${id}</h2>
                             <h3>Tabla: ${tabla}</h3>
                             <h3>Cantidad: ${cantidad}</h3>
                         </div>
                     `;
-                    const titulo_carrito = document.querySelector(".titulo-carrito");
-                    titulo_carrito.innerHTML = titulo;
-                    const div_productos = document.querySelector(".div-productos");
-                    div_productos.innerHTML = div;
-                });
+                const titulo_carrito = document.querySelector(".titulo-carrito");
+                titulo_carrito.innerHTML = titulo;
+                const div_productos = document.querySelector(".div-productos");
+                div_productos.innerHTML = div;
             });
         } else {
             fetch(`procesar-carrito.php?id_producto=${id_producto}&cantidad=${cantidad_nueva}&tabla=${tabla}`)
                 .then(response => response.json())
                 .then(response => {
                     if (response) {
-                        imprimir_carrito.addEventListener("click", () => {
+                        let html = "";
+                        let titulo = `<h1>Carrito</h1>`;
 
-                            let html = "";
-                            let titulo = `<h1>Carrito</h1>`;
-
-                            response.forEach(producto => {
-                                const id = producto.Producto;
-                                const cantidad = producto.Cantidad;
-                                const tabla = producto.Tabla;
-                                html += `
+                        response.forEach(producto => {
+                            const id = producto.Producto;
+                            const cantidad = producto.Cantidad;
+                            const tabla = producto.Tabla;
+                            html += `
                                 <div>
                                     <h2>Producto: ${id}</h2>
                                     <h3>Tabla: ${tabla}</h3>
                                     <h3>Cantidad: ${cantidad}</h3>
                                     </div>
                                 `;
-                            });
-                            const div_titulo = document.querySelector(".titulo-carrito");
-                            div_titulo.innerHTML = titulo;
-                            const div_productos = document.querySelector(".div-productos");
-                            div_productos.innerHTML = html;
                         });
+                        const div_titulo = document.querySelector(".titulo-carrito");
+                        div_titulo.innerHTML = titulo;
+                        const div_productos = document.querySelector(".div-productos");
+                        div_productos.innerHTML = html;
                         console.log("guardado correctamente");
                     } else {
                         console.log("guardado fallido");
@@ -113,7 +108,6 @@ window.onload = () => {
 
     };
     let params = new URLSearchParams(window.location.search);
-    const imprimir_carrito = document.querySelector("#imprimir-carrito");
     const id_producto = params.get('id');
     const id_usuario = params.get('id_usuario');
     const cantidad_nueva = params.get('cantidad');

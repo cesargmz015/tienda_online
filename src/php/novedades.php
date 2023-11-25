@@ -66,7 +66,6 @@ if (isset($_GET["id"])) {
                     <?php echo $boton_carrito; ?>
                     <?php if ($_SESSION["rol"] > 0) { ?>
                         <button type="button" onclick="window.location.href='./admin.php'"><span>Admin</span></button>
-                        <?php echo $boton_carrito; ?>
                     <?php } ?>
                 </div>
             <?php } else { ?>

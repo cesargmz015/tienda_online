@@ -931,7 +931,7 @@ VALUES (
 
 --
 
--- insertar admin y usuario normal de ejemplo a la tabla usuario
+-- insertar admin a la tabla usuario
 
 --
 
@@ -957,30 +957,6 @@ VALUES (
         '12345678A',
         '',
         1
-    );
-
-INSERT INTO
-    usuario (
-        nombre,
-        apellidos,
-        direccion,
-        telefono,
-        correo,
-        contraseña,
-        dni,
-        token,
-        rol
-    )
-VALUES (
-        'cesar',
-        'gomez',
-        'direccion',
-        '623456789',
-        'c@gmail.com',
-        '123456789',
-        '12345678A',
-        '',
-        0
     );
 
 --
