@@ -29,7 +29,7 @@ $tabla = $_GET["table"];
         } else {
             if ($_POST["button"] == "si") {
                 $datos = $registro->eliminarDatos("DELETE from $tabla WHERE id = $id");
-                echo "se ha eliminado correctamente";
+                echo "<p>se ha eliminado correctamente</p>";
                 echo "<a href='./admin.php'>Volver</a>";
             } elseif ($_POST["button"] == "no") {
                 header('Location: ./admin.php');

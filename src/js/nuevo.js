@@ -18,6 +18,11 @@ const validarFormulario = () => {
         return false;
     }
 
+    if (imagen != "" && archivo_imagen != "") {
+        alert("Debe rellenar solo uno de los campos de la imagen");
+        return false;
+    }
+
     if (isNaN(precio)) {
         alert("El precio debe ser un número");
         return false;

@@ -168,7 +168,11 @@ CREATE TABLE
         `comentario` text NOT NULL,
         `tabla` varchar(255) NOT NULL,
         PRIMARY KEY (`id_comentario`)
-    ) ENGINE = InnoDB AUTO_INCREMENT = 24 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci
+    ) ENGINE = InnoDB AUTO_INCREMENT = 24 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 
 -- Índices para tablas volcadas
 

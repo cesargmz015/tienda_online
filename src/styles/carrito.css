@@ -1,5 +1,6 @@
 body {
     text-align: center;
+    background-color: antiquewhite;
 }
 
 .div-productos {
@@ -24,5 +25,73 @@ body {
 }
 
 .titulo-carrito {
+    margin-top: 2%;
     margin-bottom: -40px;
+}
+
+.div-productos p {
+    margin-top: 2%;
+    grid-column: 1 /-1;
+    text-align: center;
+}
+
+button {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: rgb(80, 22, 22);
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 17px;
+    padding: 16px;
+    width: 130px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+}
+
+button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+button:hover span {
+    padding-right: 15px;
+}
+
+button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+button span::before,
+button span::before,
+button span::before {
+    content: '«';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: -9px;
+    transition: 0.5s;
+}
+
+button span::after,
+button span::after,
+button span::after {
+    content: '';
+}
+
+button:hover span,
+button:hover span,
+button:hover span {
+    padding-left: 23px;
+}
+
+button:hover span::before,
+button:hover span::before,
+button:hover span::before {
+    opacity: 1;
+    left: 0;
 }
