@@ -1,3 +1,7 @@
+body {
+    background-color: antiquewhite;
+}
+
 table {
     margin: auto;
 }
@@ -12,4 +16,9 @@ td {
 
 form {
     text-align: center;
+}
+
+button {
+    width: 170px;
+    height: 50px;
 }

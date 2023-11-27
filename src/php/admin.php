@@ -20,7 +20,7 @@ if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1) {
         <div class="div-container">
             <div class="div-botones">
                 <a href="./index.php">
-                    <button type="button">Home</button>
+                    <button type="button"><span>Home</span></button>
                 </a>
                 <button type="button" id="boton-usuarios"><span>Usuarios</span></button>
                 <button type="button" id="boton-articulos"><span>Articulos</span></button>
