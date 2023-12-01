@@ -76,6 +76,9 @@ $id_usuario = isset($_SESSION["id"]) ? $_SESSION["id"] : null;
                 localStorage.setItem("carrito", arrayProductos.reverse().join("&"));
                 console.log("Producto eliminado del carrito");
                 alert("Producto eliminado del carrito");
+                if (localStorage.getItem("carrito") == "" || localStorage.getItem("carrito") == null || localStorage.getItem("carrito") == undefined) {
+                    localStorage.removeItem("carrito");
+                }
                 location.reload(); // Recarga la página para actualizar la lista de productos
             }
         }
